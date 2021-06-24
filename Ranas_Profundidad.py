@@ -23,9 +23,14 @@ def EstadoFEncontrado(estado_inicial,estado_final)
         if estadoinicial[i] == estado_final[i]:
             return true
     return False
-
+'''
+Definimos una funcion que nos retornasra el valore de i el cual sera el lugar del espacio vacio encontrado (roca vacia)
+'''
 def busquedaEspacioVacio(estado_inicial)
     for i in range(len(estado_inicial)):
         if estadoinicial[i] == "V":
             return i
             break
+
+def busquedaProfundidad(estado_inicial,estado_final):
+    List.append(estado_inicial) #Comenzamos agregando el estado inicial a la lista para tener nuestro primer nodo
