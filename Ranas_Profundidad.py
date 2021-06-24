@@ -13,3 +13,19 @@ List= Sera en donde guardemos nuestros estados
 estInicio = ["R","R","R","V","S","S","S"]  
 estFinal  = ["S","S","S","V","R","R","R"]
 List = []
+
+'''
+Definimos la comparacion que se realizara de los elementos dentro de losa rreglos para ver si se ha llegado al estado final requerido
+'''
+
+def EstadoFEncontrado(estado_inicial,estado_final)
+    for i in (len(estado_inicial)):
+        if estadoinicial[i] == estado_final[i]:
+            return true
+    return False
+
+def busquedaEspacioVacio(estado_inicial)
+    for i in range(len(estado_inicial)):
+        if estadoinicial[i] == "V":
+            return i
+            break
