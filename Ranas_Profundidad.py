@@ -34,3 +34,14 @@ def busquedaEspacioVacio(estado_inicial)
 
 def busquedaProfundidad(estado_inicial,estado_final):
     List.append(estado_inicial) #Comenzamos agregando el estado inicial a la lista para tener nuestro primer nodo
+    if EstadoFEncontrado(estado_inicial,estado_final):
+        return True #Si encuentras la solucion ya salte amigo------------------------------------
+    else:
+        i=busquedaEspacioVacio(estado_inicial) #Si no haras los siguientes pasos para resolver el problema de la vida----------
+        
+    '''
+    c
+    '''
+        if i+1 <= len(estado_inicial)-1 and estado_inicial[i+1] == "S":
+            
+
