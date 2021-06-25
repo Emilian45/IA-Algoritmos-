@@ -40,8 +40,41 @@ def busquedaProfundidad(estado_inicial,estado_final):
         i=busquedaEspacioVacio(estado_inicial) #Si no haras los siguientes pasos para resolver el problema de la vida----------
         
     '''
-    c
+    dado el indice del espacio vacio cerificara si el sapo esta en la posicion para moverse
+    y se copiara el estado en el que se encuentra y mandarlo dentro de la lista recursiva que verificara si es el estado final
+    y si no lo es hara de nuevo la busqueda entr los posibles movimientos, asi en u  ciclo hasta que  encuentre
     '''
         if i+1 <= len(estado_inicial)-1 and estado_inicial[i+1] == "S":
+            copiaestado = copy.copy(estado_inicial)
+            copiaestado[i] = "S"
+            copiaestado[i+1] = "V"
+            if busquedaProfundidad (copiaestado, estado_final): #Aplicamos la recursividad con la copia del estado inicial para elarguemnto quede en el estado actual
+                return True
+
+        if i-2 >= 0 and estadoinicial[i-2] == "R":
+            copiaestado = copy.copy(estadoinicial)
+            copiaestado[i] = "R"
+            copiaestado[i-2] = "V"
+            if busquedaProfundidad(copiaestado,estadofinal):
+            return True
+
+        if i+2 <= len(estadoinicial)-1 and estadoinicial[i+2] == "S":
+            copiaestado = copy.copy(estadoinicial)
+            copiaestado[i] = "S"
+            copiaestado[i+2] = "V"
+            if busquedaProfundidad(copiaestado,estadofinal):
+            return True
+
+        if i-1 >= 0 and estadoinicial[i-1] == "R":
+            copiaestado = copy.copy(estadoinicial)
+            copiaestado[i] = "R"
+            copiaestado[i-1] = "V"
+            if busquedaProfundidad(copiaestado,estadofinal):
+            return True
+        List.pop()
+        return False
+    else:
+         return True
+        
             
 
