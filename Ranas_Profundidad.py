@@ -19,8 +19,8 @@ Definimos la comparacion que se realizara de los elementos dentro de losa rreglo
 '''
 
 def EstadoFEncontrado(estado_inicial,estado_final):
-    for i in (len(estado_inicial)):
-        if estadoinicial[i] == estado_final[i]:
+    for i in range(len(estado_inicial)):
+        if estado_inicial[i] == estado_final[i]:
             return true
     return False
 '''
