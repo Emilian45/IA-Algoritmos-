@@ -18,7 +18,7 @@ List = []
 Definimos la comparacion que se realizara de los elementos dentro de losa rreglos para ver si se ha llegado al estado final requerido
 '''
 
-def EstadoFEncontrado(estado_inicial,estado_final)
+def EstadoFEncontrado(estado_inicial,estado_final):
     for i in (len(estado_inicial)):
         if estadoinicial[i] == estado_final[i]:
             return true
@@ -26,7 +26,7 @@ def EstadoFEncontrado(estado_inicial,estado_final)
 '''
 Definimos una funcion que nos retornasra el valore de i el cual sera el lugar del espacio vacio encontrado (roca vacia)
 '''
-def busquedaEspacioVacio(estado_inicial)
+def busquedaEspacioVacio(estado_inicial):
     for i in range(len(estado_inicial)):
         if estadoinicial[i] == "V":
             return i
@@ -75,6 +75,12 @@ def busquedaProfundidad(estado_inicial,estado_final):
         return False
     else:
          return True
+
+if busquedaProfundidad(estInicio,estFinal):
+  print("Solución Encontrada")
+  for i in lista:
+    print(i)
+
         
             
 
