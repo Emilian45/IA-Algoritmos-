@@ -73,7 +73,11 @@ def busquedaProfundidad(estado_inicial,estado_final):
             return True
       List.pop()
       return False
-
+'''
+Iniciamos el tiempo, y despues ejecutamos elalgoritmo de busqueda en donde si sale retornara un True, imprimara el texto y 
+dara inicio al ciclo for que imprimira toda la lista donde se encuentra los pasos que siguio  para llegar al estado final
+Iniciamos el segundo estado de tiempo y restamos el tiempo final menos eltiempo inicial para poder ver el tiempo final 
+'''
 profundidad_inicio = time.time()
 
 if busquedaProfundidad(estInicio,estFinal):
