@@ -101,6 +101,14 @@ def busquedaProfundidad(estado_inicial):
               if busquedaProfundidad( [ copia_orilla1 , copia_orilla2,"Regresamos 1 canibal y 1 misionero" ] ):
                 return True
 
+    lista.pop()
+    return False
+
+if busquedaProfundidad(estInicio):
+  print("Solucion encontrada")
+  for i in lista:
+    print(i)
+
             
 
 
