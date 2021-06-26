@@ -12,10 +12,10 @@ siguiendo las reglas que se estreblcerean mas adelantes
 estInicio = [["Lobo", "Coles", "Oveja"],[]]
 List=[]
 
-def EstadoFEncontrado(estado_inicial)
+def EstadoFEncontrado(estado_inicial):
     if len(estado_inicial[1])>3:
         return False
-    elif len(estado_inicial)==3
+    elif len(estado_inicial)==3:
         return True
 
 def validacionExisObjeto(Orilla, Objeto):
@@ -41,9 +41,9 @@ def busquedaProfundidad(estado_inicial):
   
   else:
     #Verifica si la oveja esta en la orilla
-    if len(List)-1 < Prof
-      if len(orilla1) >0
-        if validacionExisObjeto (orilla1, "Oveja")
+    if  Prof > len(List)-1:
+      if len(orilla1) >0:
+        if validacionExisObjeto (orilla1, "Oveja"):
           copia_orilla1= copy.copy(orilla1)
           copia_orilla2= copy.copy(orilla2)
           copia_orilla1.remove("Oveja")
@@ -51,7 +51,7 @@ def busquedaProfundidad(estado_inicial):
           if busquedaProfundidad([copia_orilla1,copia_orilla2]):#Aqui se hace la magia de la recursividad 
             return True
     #Vericia si el lobo esta en la orilla
-        if validacionExisObjeto(orilla1,"Lobo") and validacionExisObjeto(orilla1,"Coles") and not validacionExisObjeto(orilla1,"Oveja") or validacionExisObjeto(orilla,"Lobo") and  validacionExisObjeto(orilla,"Oveja") and not validacionExisObjeto(orilla,"Coles")
+        if validacionExisObjeto(orilla1,"Lobo") and validacionExisObjeto(orilla1,"Coles") and not validacionExisObjeto(orilla1,"Oveja") or validacionExisObjeto(orilla,"Lobo") and  validacionExisObjeto(orilla,"Oveja") and not validacionExisObjeto(orilla,"Coles"):
           copia_orilla1= copy.copy(orilla1)
           copia_orilla2= copy.copy(orilla2)
           copia_orilla1.remove("Lobo")
@@ -59,7 +59,7 @@ def busquedaProfundidad(estado_inicial):
           if busquedaProfundidad([copia_orilla1,copia_orilla2]):#Aqui se hace la magia de la recursividad 
             return True
 
-        if validacionExisObjeto(orilla1,"Coles") and validacionExisObjeto(orilla1,"Lobo") and not validacionExisObjeto(orilla1,"Oveja") or validacionExisObjeto(orilla,"Coles") and  validacionExisObjeto(orilla,"Oveja") and not validacionExisObjeto(orilla,"Lobo")
+        if validacionExisObjeto(orilla1,"Coles") and validacionExisObjeto(orilla1,"Lobo") and not validacionExisObjeto(orilla1,"Oveja") or validacionExisObjeto(orilla,"Coles") and  validacionExisObjeto(orilla,"Oveja") and not validacionExisObjeto(orilla,"Lobo"):
           copia_orilla1= copy.copy(orilla1)
           copia_orilla2= copy.copy(orilla2)
           copia_orilla1.remove("Coles")
@@ -71,9 +71,6 @@ def busquedaProfundidad(estado_inicial):
   List.pop()
   return False
 
-if busquedaProfundidad(estado_inicial):
+if busquedaProfundidad(estInicio):
   for i in lista:
     print(i)
-    
-
-
