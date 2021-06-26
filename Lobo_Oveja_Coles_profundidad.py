@@ -41,7 +41,7 @@ def busquedaProfundidad(estado_inicial):
   
   else:
     #Verifica si la oveja esta en la orilla
-    if  Prof > len(List)-1:
+    if  len(List)-1 < Prof and len:
       if len(orilla1) >0:
         if validacionExisObjeto (orilla1, "Oveja"):
           copia_orilla1= copy.copy(orilla1)
