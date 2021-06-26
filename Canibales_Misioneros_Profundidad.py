@@ -47,24 +47,61 @@ def busquedaProfundidad(estado_inicial):
                 if busquedaProfundidad( [ orilla1 , orilla2,"Mandamos 2 canibales" ] ):
                     return True 
 
-        #1 Canibal y 1 Misionero 
-        if BusquedaMisionero(ori) > 0 and BusquedaCanibal(ori) and BusquedaMisionero(ori) - BusquedaCanibal(ori) >= 0 and BusquedaMisionero(des) - BusquedaCanibal(des) >= 0: 
-            copia_orilla1= copy.copy(orilla1)
-            copia_orilla2= copy.copy(orilla2)
-            copia_orilla1.remove("Misionero")
-            copia_orilla1.remove("Canibal")
-            copia_orilla2.remove("Misionero")
-            copia_orilla2.remove("Canibal")
-          if busquedaProfundidad( [ copia_orilla1 , copia_orilla2,"Mandamos 1 canibal y 1 misionero" ] ):
-            return True
-        
-        #2 Misioneros 
-        if BusquedaMisionero(ori) >= 2 and BusquedaMisionero(ori) - BusquedaCanibal(ori) >= 2:
-          copia_orilla1 = copy.copy(ori)
-          copia_orilla2 = copy.copy(des)
-          copia_orilla1.remove("Misionero")
-          copia_orilla1.remove("Misionero")
-          copia_orilla2.append("Misionero")
-          copia_orilla2.append("Misionero")
-          if BEP( [ copia_orilla1 , copia_orilla2,"Mandamos 2 Misioneros" ] ):
-            return True
+          #1 Canibal y 1 Misionero 
+            if BusquedaMisionero(orilla1) > 0 and BusquedaCanibal(orilla1) and BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >= 0 and BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >= 0: 
+                copia_orilla1= copy.copy(orilla1)
+                copia_orilla2= copy.copy(orilla2)
+                copia_orilla1.remove("Misionero")
+                copia_orilla1.remove("Canibal")
+                copia_orilla2.remove("Misionero")
+                copia_orilla2.remove("Canibal")
+              if busquedaProfundidad( [ copia_orilla1 , copia_orilla2,"Mandamos 1 canibal y 1 misionero" ] ):
+                return True
+            
+            #2 Misioneros 
+            if BusquedaMisionero(orilla1) >= 2 and BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >= 2:
+                copia_orilla1 = copy.copy(orilla1)
+                copia_orilla2 = copy.copy(orilla2)
+                copia_orilla1.remove("Misionero")
+                copia_orilla1.remove("Misionero")
+                copia_orilla2.append("Misionero")
+                copia_orilla2.append("Misionero")
+              if busquedaProfundidad( [ copia_orilla1 , copia_orilla2,"Mandamos 2 Misioneros" ] ):
+                return True
+            
+            if BusquedaCanibal(orilla2) >= 2 and BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >=0 and BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >=2 or BusquedaCanibal(orilla2) >= 2 and BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >=0 and BusquedaMisionero(orilla1) == 0: 
+                copia_orilla1 = copy.copy(orilla1)
+                copia_orilla2 = copy.copy(orilla2)
+                copia_orilla2.remove("Canibal")
+                copia_orilla2.remove("Canibal")
+                copia_orilla1.append("Canibal")
+                copia_orilla1.append("Canibal")
+              if busquedaProfundidad( [ copia_orilla1 , copia_orilla2,"Regresamos 2 canibales" ] ):
+                return True
+
+            #2 Misioneros 
+            if BusquedaMisionero(orilla2) >= 2 and BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >= 2:
+              copia_orilla1 = copy.copy(orilla1)
+              copia_orilla2 = copy.copy(orilla2)
+              copia_orilla2.remove("Misionero")
+              copia_orilla2.remove("Misionero")
+              copia_orilla1.append("Misionero")
+              ccocopia_orilla1ri.append("Misionero")
+              if busquedaProfundidad( [ copia_orilla1 , copia_orilla2,"Regresamos 2 Misioneros" ] ):
+                return True
+
+            #1 Canibal y 1 Misionero 
+            if BusquedaMisionero(orilla2) > 0 and BusquedaCanibal(orilla2) and BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >= 0 and BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >= 0: 
+              copia_orilla1 = copy.copy(orilla1)
+              copia_orilla2 = copy.copy(orilla2)
+              copia_orilla2.remove("Misionero")
+              copia_orilla2.remove("Canibal")
+              copia_orilla1.append("Misionero")
+              copia_orilla1.append("Canibal")
+              if busquedaProfundidad( [ copia_orilla1 , copia_orilla2,"Regresamos 1 canibal y 1 misionero" ] ):
+                return True
+
+            
+
+
+          
