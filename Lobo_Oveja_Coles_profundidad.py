@@ -68,6 +68,7 @@ def busquedaProfundidad(estado_inicial):
             return True
 
   
+  #Se va le largo el index
   List.pop()
   return False
 
