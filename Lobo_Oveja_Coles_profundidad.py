@@ -18,87 +18,45 @@ def EstadoFEncontrado(estado_inicial)
     elif len(estado_inicial)==3
         return True
 
-def buscaelemento(ar, el):
-  for i in ar:
-    if i == el:
+def validacionExisObjeto(Orilla, Objeto):
+  for i in Orilla:
+    if i == Objeto:
       return True
   return False
 
-def BEA(ea):
+'''
+Comenzamos la funcion de profundidad y agregamos el estado inicial a nuestra lista de soluciones
+Establecemos en base a la lista de listas cada elemento lista dentro de la lista sera una orilla a ala cual cruzar
+establecemos la profundidad 
+'''
+Prof = 20 #La maxima cantidad de estados aceptar en nuestra cola
 
-  #print("Estado Actual: ", ea)
-  
-  lista.append(ea)
-  ori = ea[0]
-  des = ea[1]
+def busquedaProfundidad(estado_inicial):
+  List.append(estado_inicial)
+  orilla1= List[0]
+  orilla2= List[1]
 
-  if solucionEncontrada(ea):
+  if EstadoFEncontrado(estado_inicial):
     return True
+  
   else:
-
-    if profundidad > len(lista)-1:
-
-      if len(ori) > 0:
-
-        #Oveja Origen -> destino
-        if buscaelemento(ori,"O"):
-          ccori = copy.copy(ori)
-          ccdes = copy.copy(des)
-          ccori.remove("O")
-          ccdes.append("O")
-          if BEA( [ ccori , ccdes] ):
+    #Verifica si la oveja esta en la orilla
+    if len(List)-1 < Prof
+      if len(orilla1) >0
+        if validacionExisObjeto (orilla1, "Oveja")
+          copia_orilla1= copy.copy(orilla1)
+          copia_orilla2= copy.copy(orilla2)
+          copia_orilla1.remove("Oveja")
+          copia_orilla2.remove("Oveja")
+          if busquedaProfundidad([copia_orilla1,copia_orilla2]):#Aqui se hace la magia de la recursividad 
             return True
-        
-        #Oveja destino -> origen
-        if buscaelemento(des,"O"):
-          ccori = copy.copy(ori)
-          ccdes = copy.copy(des)
-          ccdes.remove("O")
-          ccori.append("O")
-          if BEA( [ ccori , ccdes] ):
-            return True
+    #Vericia si el lobo esta en la orilla
+      if validacionExisObjeto(orilla1,"Lobo") and validacionExisObjeto(orilla1)
 
-        #Lobo Origen -> destino
-        if buscaelemento(ori,"L") and buscaelemento(ori, "R") and not buscaelemento(ori, "O") or buscaelemento(ori,"L") and buscaelemento(ori, "O") and not buscaelemento(ori, "R"):
-          ccori = copy.copy(ori)
-          ccdes = copy.copy(des)
-          ccori.remove("L")
-          ccdes.append("L")
-          if BEA( [ ccori , ccdes] ):
-            return True
-        
-        #Lobo destino -> origen
-        if buscaelemento(des,"L") and buscaelemento(des, "R") and not buscaelemento(des, "O") or buscaelemento(des,"L") and buscaelemento(des, "O") and not buscaelemento(des, "R"):
-          ccori = copy.copy(ori)
-          ccdes = copy.copy(des)
-          ccdes.remove("L")
-          ccori.append("L")
-          if BEA( [ ccori , ccdes] ):
-            return True
 
-        #Repollo Origen -> destino
-        if buscaelemento(ori,"R") and buscaelemento(ori, "L") and not buscaelemento(ori, "O") or buscaelemento(ori,"R") and buscaelemento(ori, "O") and not buscaelemento(ori, "L"):
-          ccori = copy.copy(ori)
-          ccdes = copy.copy(des)
-          ccori.remove("R")
-          ccdes.append("R")
-          if BEA( [ ccori , ccdes] ):
-            return True
-        
-        #Repollo destino -> origen
-        if buscaelemento(des,"R") and buscaelemento(des, "R") and not buscaelemento(des, "O") or buscaelemento(des,"R") and buscaelemento(des, "L") and not buscaelemento(des, "O"):
-          ccori = copy.copy(ori)
-          ccdes = copy.copy(des)
-          ccdes.remove("R")
-          ccori.append("R")
-          if BEA( [ ccori , ccdes] ):
-            return True
 
-    lista.pop()
-    return False
+  
 
-if BEA(estadoInicial):
-  for i in lista:
-    print(i)
+    
 
 
