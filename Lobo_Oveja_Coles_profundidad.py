@@ -68,7 +68,12 @@ def busquedaProfundidad(estado_inicial):
             return True
 
   
+  List.pop()
+  return False
 
+if busquedaProfundidad(estado_inicial):
+  for i in lista:
+    print(i)
     
 
 
