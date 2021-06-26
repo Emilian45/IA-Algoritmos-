@@ -59,6 +59,13 @@ def busquedaProfundidad(estado_inicial):
           if busquedaProfundidad([copia_orilla1,copia_orilla2]):#Aqui se hace la magia de la recursividad 
             return True
 
+        if validacionExisObjeto(orilla1,"Coles") and validacionExisObjeto(orilla1,"Lobo") and not validacionExisObjeto(orilla1,"Oveja") or validacionExisObjeto(orilla,"Coles") and  validacionExisObjeto(orilla,"Oveja") and not validacionExisObjeto(orilla,"Lobo")
+          copia_orilla1= copy.copy(orilla1)
+          copia_orilla2= copy.copy(orilla2)
+          copia_orilla1.remove("Coles")
+          copia_orilla2.remove("Coles")
+          if busquedaProfundidad([copia_orilla1,copia_orilla2]):#Aqui se hace la magia de la recursividad 
+            return True
 
   
 
