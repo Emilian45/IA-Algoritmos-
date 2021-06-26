@@ -67,6 +67,30 @@ def busquedaProfundidad(estado_inicial):
           if busquedaProfundidad([copia_orilla1,copia_orilla2]):#Aqui se hace la magia de la recursividad 
             return True
 
+        if validacionExisObjeto (orilla2, "Oveja"):
+          copia_orilla1= copy.copy(orilla1)
+          copia_orilla2= copy.copy(orilla2)
+          copia_orilla1.remove("Oveja")
+          copia_orilla2.remove("Oveja")
+          if busquedaProfundidad([copia_orilla1,copia_orilla2]):#Aqui se hace la magia de la recursividad 
+            return True
+
+            #Vericia si el lobo esta en la orilla
+        if validacionExisObjeto(orilla2,"Lobo") and validacionExisObjeto(orilla2,"Coles") and not validacionExisObjeto(orilla2,"Oveja") or validacionExisObjeto(orilla2,"Lobo") and  validacionExisObjeto(orilla2,"Oveja") and not validacionExisObjeto(orilla2,"Coles"):
+          copia_orilla1= copy.copy(orilla1)
+          copia_orilla2= copy.copy(orilla2)
+          copia_orilla1.remove("Lobo")
+          copia_orilla2.remove("Lobo")
+          if busquedaProfundidad([copia_orilla1,copia_orilla2]):#Aqui se hace la magia de la recursividad 
+            return True
+
+        if validacionExisObjeto(orilla2,"Coles") and validacionExisObjeto(orilla2,"Lobo") and not validacionExisObjeto(orilla2,"Oveja") or validacionExisObjeto(orilla2,"Coles") and  validacionExisObjeto(orilla2,"Oveja") and not validacionExisObjeto(orilla2,"Lobo"):
+          copia_orilla1= copy.copy(orilla1)
+          copia_orilla2= copy.copy(orilla2)
+          copia_orilla1.remove("Coles")
+          copia_orilla2.remove("Coles")
+          if busquedaProf
+
   
   #Se va le largo el index
   List.pop()
