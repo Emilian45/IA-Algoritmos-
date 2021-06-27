@@ -189,3 +189,4 @@ def busquedaProfundidad(estado_inicial, luz):
         for i in lista:
             print(i)
 
+#Que esta pasando doctor garcia?
