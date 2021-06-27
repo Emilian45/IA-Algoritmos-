@@ -31,8 +31,27 @@ def busquedaProfundidad(estado_inicial, luz):
     else:
 
         if len(List)-1 < Prof and len(orilla1)>0 and luz >0:
-
-        
-
+            #Velocidad del 3
+            if  BuscaExsitenciaSujeto(orilla1,1) and BuscaExsitenciaSujeto(orilla1,3)
+                copia_orilla1 = copy.copy(orilla1)
+                copia_orilla2 = copy.copy(orilla2)
+                copia_orilla1.remove(1)
+                copia_orilla1.remove(3)
+                copia_orilla2.append(1)
+                copia_orilla2.append(3)
+                copia_luz= copy.copy(luz)-3
+                if busquedaProfundidad([copia_orilla1],[copia_orilla2,"Luz menos 3"],copia_luz)
+                    return True
+            
+            elif  BuscaExsitenciaSujeto(orilla1,1) and BuscaExsitenciaSujeto(orilla1,6)
+                copia_orilla1 = copy.copy(orilla1)
+                copia_orilla2 = copy.copy(orilla2)
+                copia_orilla1.remove(1)
+                copia_orilla1.remove(6)
+                copia_orilla2.append(1)
+                copia_orilla2.append(6)
+                copia_luz= copy.copy(luz)-3
+                if busquedaProfundidad([copia_orilla1],[copia_orilla2,"Luz menos 6"],copia_luz)
+                    return True
 
 
