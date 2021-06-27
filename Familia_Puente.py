@@ -185,3 +185,7 @@ def busquedaProfundidad(estado_inicial, luz):
                     return True
         lista.pop()
         return False
+    if busquedaProfundidad(estInicio, lampara):
+        for i in lista:
+            print(i)
+            
