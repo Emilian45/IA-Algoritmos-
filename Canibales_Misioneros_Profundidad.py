@@ -37,7 +37,7 @@ def busquedaProfundidad(estado_inicial):
     else:
         if len(List)-1 < Prof and len(orilla1)>0:
             #Ya que se aplicara de nuevo el modo de vuelta ida tendremos que ver de ambos lados 
-            if BusquedaCanibal(orilla1) >= 2 and BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >=0 and BusquedaMisionero(orilla1) - BusquedaCanibal(orilla2) >=2 or BusquedaCanibal(orilla1) >= 2 and miBusquedaMisionerosioneros(orilla1) - BusquedaCanibal(orilla1) >=0 and BusquedaMisionero(orilla2) == 0: 
+            if (BusquedaCanibal(orilla1) >= 2 and BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >=0) and BusquedaMisionero(orilla1) - BusquedaCanibal(orilla2) >=2 or BusquedaCanibal(orilla1) >= 2 and miBusquedaMisionerosioneros(orilla1) - BusquedaCanibal(orilla1) >=0 and BusquedaMisionero(orilla2) == 0: 
                 copia_orilla1= copy.copy(orilla1)
                 copia_orilla2= copy.copy(orilla2)
                 copia_orilla1.remove("Canibal")
@@ -68,8 +68,8 @@ def busquedaProfundidad(estado_inicial):
                 copia_orilla2.append("Misionero")
                 if busquedaProfundidad( [ copia_orilla1 , copia_orilla2,"Mandamos 2 Misioneros" ] ):
                   return True
-            
-            if BusquedaCanibal(orilla2) >= 2 and BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >=0 and BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >=2 or BusquedaCanibal(orilla2) >= 2 and BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >=0 and BusquedaMisionero(orilla1) == 0: 
+            #2 canibales que regresan
+            if ((BusquedaCanibal(orilla2) >= 2) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla1) >=0) and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >=2)) or ((BusquedaCanibal(orilla2) >= 2) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >=0) and (BusquedaMisionero(orilla1) == 0)): 
                 copia_orilla1 = copy.copy(orilla1)
                 copia_orilla2 = copy.copy(orilla2)
                 copia_orilla2.remove("Canibal")
@@ -79,8 +79,8 @@ def busquedaProfundidad(estado_inicial):
                 if busquedaProfundidad( [ copia_orilla1 , copia_orilla2,"Regresamos 2 canibales" ] ):
                   return True
 
-            #2 Misioneros 
-            if BusquedaMisionero(orilla2) >= 2 and BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >= 2:
+            #2 Misioneros  que regresan
+            if (BusquedaMisionero(orilla2) >= 2) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >= 2):
               copia_orilla1 = copy.copy(orilla1)
               copia_orilla2 = copy.copy(orilla2)
               copia_orilla2.remove("Misionero")
@@ -90,8 +90,8 @@ def busquedaProfundidad(estado_inicial):
               if busquedaProfundidad( [ copia_orilla1 , copia_orilla2,"Regresamos 2 Misioneros" ] ):
                 return True
 
-            #1 Canibal y 1 Misionero 
-            if BusquedaMisionero(orilla2) > 0 and BusquedaCanibal(orilla2) and BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >= 0 and BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >= 0: 
+            #1 Canibal y 1 Misionero  que regresan
+            if (BusquedaMisionero(orilla2) > 0) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >= 0) and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >= 0): 
               copia_orilla1 = copy.copy(orilla1)
               copia_orilla2 = copy.copy(orilla2)
               copia_orilla2.remove("Misionero")
@@ -103,5 +103,8 @@ def busquedaProfundidad(estado_inicial):
 
     List.pop()
     return False
+
+            
+
 
             
