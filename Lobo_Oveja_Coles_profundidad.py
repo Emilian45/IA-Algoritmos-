@@ -95,8 +95,10 @@ def busquedaProfundidad(estado_inicial):
   #Se va le largo el index
   List.pop()
   return False
-
+profundidad_inicio = time.time()
 if busquedaProfundidad(estInicio):
   for i in List:
     print(i)
+profundidad_final= time.time()
+print("\nBúsqueda finalizada en",profundidad_final - profundidad_inicio,"segundos\n")
  
