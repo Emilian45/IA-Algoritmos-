@@ -18,6 +18,7 @@ lista = []
 
 '''
 Definimos la comparacion que se realizara de los elementos dentro de losa rreglos para ver si se ha llegado al estado final requerido
+Mientras no encuentres ninguna similitud dentro de los elementos  returna un false 
 '''
 
 def EstadoFEncontrado(estado_inicial,estado_final):
@@ -44,9 +45,9 @@ Prof = 20 #La maxima cantidad de estados aceptar en nuestra cola
 def busquedaProfundidad(estado_inicial,estado_final):
   lista.append(estado_inicial) #Comenzamos agregando el estado inicial a la lista para tener nuestro primer nodo
   if EstadoFEncontrado(estado_inicial,estado_final) and len(lista)-1 < Prof:
-      return True #Si encuentras la solucion ya salte amigo------------------------------------
-  else:
-      i=busquedaEspacioVacio(estado_inicial) #Si no haras los siguientes pasos para resolver el problema de la vida---------
+      return True #Si encuentras la solucion ya salte amigo
+  else: #Si no haras los siguientes pasos para resolver el problema de la vida
+      i=busquedaEspacioVacio(estado_inicial) 
       if i+1 <= len(estado_inicial)-1 and estado_inicial[i+1] == "S":
         copiaestado = copy.copy(estado_inicial)
         copiaestado[i] = "S"
@@ -78,7 +79,8 @@ def busquedaProfundidad(estado_inicial,estado_final):
       return False
 '''
 Iniciamos el tiempo, y despues ejecutamos elalgoritmo de busqueda en donde si sale retornara un True, imprimara el texto y 
-dara inicio al ciclo for que imprimira toda la lista donde se encuentra los pasos que siguio  para llegar al estado final
+dara inicio al ciclo for que imprimira toda la lista donde se encuentra los pasos que siguio (todo el contenido de nuestra
+ pila  recorriendolo con un for) para llegar al estado final
 Iniciamos el segundo estado de tiempo y restamos el tiempo final menos eltiempo inicial para poder ver el tiempo final 
 '''
 
