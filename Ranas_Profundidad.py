@@ -11,9 +11,10 @@ V=Espacio vacio
 S= Sapos
 List= Sera en donde guardemos nuestros estados 
 '''
+
 estInicio = ["R","R","R","V","S","S","S"]  
 estFinal  = ["S","S","S","V","R","R","R"]
-List = []
+lista = []
 
 '''
 Definimos la comparacion que se realizara de los elementos dentro de losa rreglos para ver si se ha llegado al estado final requerido
@@ -21,15 +22,15 @@ Definimos la comparacion que se realizara de los elementos dentro de losa rreglo
 
 def EstadoFEncontrado(estado_inicial,estado_final):
     for i in range(len(estado_inicial)):
-        if estado_inicial[i] == estado_final[i]:
-          return True
-    return False
+        if estado_inicial[i] != estado_final[i]:
+          return False
+    return True
 '''
 Definimos una funcion que nos retornasra el valore de i el cual sera el lugar del espacio vacio encontrado (roca vacia)
 '''
 def busquedaEspacioVacio(estado_inicial):
     for i in range(len(estado_inicial)):
-        if estadoinicial[i] == "V":
+        if estado_inicial[i] == "V":
             return i
             break
 
@@ -38,9 +39,11 @@ dado el indice del espacio vacio cerificara si el sapo esta en la posicion para 
 y se copiara el estado en el que se encuentra y mandarlo dentro de la lista recursiva que verificara si es el estado final
 y si no lo es hara de nuevo la busqueda entr los posibles movimientos, asi en u  ciclo hasta que  encuentre
 '''
+Prof = 20 #La maxima cantidad de estados aceptar en nuestra cola
+
 def busquedaProfundidad(estado_inicial,estado_final):
-  List.append(estado_inicial) #Comenzamos agregando el estado inicial a la lista para tener nuestro primer nodo
-  if EstadoFEncontrado(estado_inicial,estado_final):
+  lista.append(estado_inicial) #Comenzamos agregando el estado inicial a la lista para tener nuestro primer nodo
+  if EstadoFEncontrado(estado_inicial,estado_final) and len(lista)-1 < Prof:
       return True #Si encuentras la solucion ya salte amigo------------------------------------
   else:
       i=busquedaEspacioVacio(estado_inicial) #Si no haras los siguientes pasos para resolver el problema de la vida---------
@@ -51,37 +54,38 @@ def busquedaProfundidad(estado_inicial,estado_final):
         if busquedaProfundidad (copiaestado, estado_final): #Aplicamos la recursividad con la copia del estado inicial para elarguemnto quede en el estado actual
           return True
 
-      if i-2 >= 0 and estadoinicial[i-2] == "R":
-        copiaestado = copy.copy(estadoinicial)
+      if i-2 >= 0 and estado_inicial[i-2] == "R":
+        copiaestado = copy.copy(estado_inicial)
         copiaestado[i] = "R"
         copiaestado[i-2] = "V"
-        if busquedaProfundidad(copiaestado,estadofinal):
+        if busquedaProfundidad(copiaestado,estado_final):
           return True
 
-      if i+2 <= len(estadoinicial)-1 and estadoinicial[i+2] == "S":
-        copiaestado = copy.copy(estadoinicial)
+      if i+2 <= len(estado_inicial)-1 and estado_inicial[i+2] == "S":
+        copiaestado = copy.copy(estado_inicial)
         copiaestado[i] = "S"
         copiaestado[i+2] = "V"
-        if busquedaProfundidad(copiaestado,estadofinal):
+        if busquedaProfundidad(copiaestado,estado_final):
            return True
 
-      if i-1 >= 0 and estadoinicial[i-1] == "R":
-          copiaestado = copy.copy(estadoinicial)
+      if i-1 >= 0 and estado_inicial[i-1] == "R":
+          copiaestado = copy.copy(estado_inicial)
           copiaestado[i] = "R"
           copiaestado[i-1] = "V"
-          if busquedaProfundidad(copiaestado,estadofinal):
+          if busquedaProfundidad(copiaestado,estado_final):
             return True
-      List.pop()
+      lista.pop()
       return False
 '''
 Iniciamos el tiempo, y despues ejecutamos elalgoritmo de busqueda en donde si sale retornara un True, imprimara el texto y 
 dara inicio al ciclo for que imprimira toda la lista donde se encuentra los pasos que siguio  para llegar al estado final
 Iniciamos el segundo estado de tiempo y restamos el tiempo final menos eltiempo inicial para poder ver el tiempo final 
 '''
+
 profundidad_inicio = time.time()
 
 if busquedaProfundidad(estInicio,estFinal):
-  print("Solución Encontrada")
+  print("Encontrado")
   for i in lista:
     print(i)
 
