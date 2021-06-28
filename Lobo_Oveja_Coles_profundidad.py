@@ -12,11 +12,18 @@ siguiendo las reglas que se estreblcerean mas adelantes
 estInicio = [["Lobo", "Coles", "Oveja"],[]]
 List=[]
 
+'''
+Si la orilla destino, el elemento 2 de nuestra lista de listas tiene los 3 objetos que diga  con un true que  se ha completado todos los
+objetivos
+'''
 def EstadoFEncontrado(estado_inicial):
     if len(estado_inicial[1])== 3:
         return True
     else:
         return False
+
+'''Que retorne  un True si en la orilla que digamos exista el objeto que igual digamos para estar viendo asi hacer las reglas
+'''
 
 def validacionExisObjeto(Orilla, Objeto):
   for i in Orilla:
@@ -30,6 +37,14 @@ Establecemos en base a la lista de listas cada elemento lista dentro de la lista
 establecemos la profundidad 
 '''
 Prof = 10 #La maxima cantidad de estados aceptar en nuestra cola
+
+
+'''
+Vemos que elementos hay en las orillas que estamos a punto de mandar para que se cumplan las condicionales del juego y la manera en que se trabajo 
+la parte de los estados recursivos es que cada vez que realize un m,ovimiento se haga una copia de ese estado y lo mande como el nuevo estado al inicio 
+y comienze la verificacion de nuevo del nuevo estado sin haber guardado la lista de posibles caminos por recorrer, solo se va y espera a que encuentre
+mientras no llegue al tope
+'''
 
 def busquedaProfundidad(estado_inicial):
   List.append(estado_inicial)
@@ -88,9 +103,15 @@ def busquedaProfundidad(estado_inicial):
           copia_orilla2= copy.copy(orilla2)
           copia_orilla2.remove("Coles")
           copia_orilla1.append("Coles")
-          if busquedaProfundidad([copia_orilla1,copia_orilla2,"regresa las coles"]):#Aqui se hace la magia de la recursividad 
+          if busquedaProfundidad([copia_orilla1,copia_orilla2,"Regresa las coles"]):#Aqui se hace la magia de la recursividad 
             return True
 
+'''
+Iniciamos el tiempo, y despues ejecutamos elalgoritmo de busqueda en donde si sale retornara un True, imprimara el texto y 
+dara inicio al ciclo for que imprimira toda la lista donde se encuentra los pasos que siguio (todo el contenido de nuestra
+ pila  recorriendolo con un for) para llegar al estado final
+Iniciamos el segundo estado de tiempo y restamos el tiempo final menos eltiempo inicial para poder ver el tiempo final 
+'''
   
   #Se va le largo el index
   List.pop()
