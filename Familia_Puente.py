@@ -2,205 +2,28 @@ import copy
 import time
 
 estInicio= [[1,3,6,8,12,],[]]
+estFinal=5
 List=[]
 lampara=30
+Ida= False
 
-def EstadoFEncontrado(estado_inicial):
-    if len(estado_inicial[1])==5:
+#Es hora de rehacer esto, tengo todo en el txt y veamos como no meterle mis encrucijadas mentales
+
+'''
+La funcion que ayudara a saber si encontramos el estado objetivo, se define afuera de todo ya que al usar la 
+recursividad nos ayudara a tener la nocion de cuando acabarla
+'''
+
+def OnePiece(estado_actual, estado_final):
+    if len(estado_actual)==estado_final:
         return True
     else:
         return False
 
-def BuscaExsitenciaSujeto(orilla,sujeto):
-    for i in orilla:
-        if sujeto ==i:
-            return True
+Prof = 20 #La maxima cantidad de estados aceptar en nuestra lista que trabaja como pila :p
+
+def busquedaProfundidad(estado_actual, estado_final, ):
+
+
+if busquedaProfundidad(estInicio, lampara,sentido, tiempo):
     
-    return  False
-
-Prof = 20 #La maxima cantidad de estados aceptar en nuestra cola
-
-def busquedaProfundidad(estado_inicial, luz):
-    List.append(estado_inicial)
-    orilla1= estado_inicial[0]
-    orilla2= estado_inicial[1]
-    
-
-    if EstadoFEncontrado(estado_inicial):
-        return True
-
-    else:
-
-        if len(List)-1 < Prof and len(orilla1)>0 and luz >0:
-            #Movimientos con el 1
-            #Velocidad del 3
-            if  BuscaExsitenciaSujeto(orilla1,1) and BuscaExsitenciaSujeto(orilla1,3):
-                copia_orilla1 = copy.copy(orilla1)
-                copia_orilla2 = copy.copy(orilla2)
-                copia_orilla1.remove(1)
-                copia_orilla1.remove(3)
-                copia_orilla2.append(1)
-                copia_orilla2.append(3)
-                copia_luz= copy.copy(luz)-3
-                if busquedaProfundidad([copia_orilla1,copia_orilla2,"Luz menos 3"],copia_luz):
-                    return True
-          
-
-            elif  BuscaExsitenciaSujeto(orilla2,1) and not BuscaExsitenciaSujeto(orilla2,12):
-                copia_orilla1 = copy.copy(orilla1)
-                copia_orilla2 = copy.copy(orilla2)
-                copia_orilla2.remove(1)
-                copia_orilla1.append(1)
-                copia_luz= copy.copy(luz)-1
-                if busquedaProfundidad([copia_orilla1,copia_orilla2,"Luz menos 1"],copia_luz):
-                    return True
-
-             #Movimientos con el cuarto
-            elif  BuscaExsitenciaSujeto(orilla1,8) and BuscaExsitenciaSujeto(orilla1,12):
-                copia_orilla1 = copy.copy(orilla1)
-                copia_orilla2 = copy.copy(orilla2)
-                copia_orilla1.remove(8)
-                copia_orilla1.remove(12)
-                copia_orilla2.append(8)
-                copia_orilla2.append(12)
-                copia_luz= copy.copy(luz)-12
-                if busquedaProfundidad([copia_orilla1,copia_orilla2,"Luz menos 12"],copia_luz):
-                    return True
-
-            elif  BuscaExsitenciaSujeto(orilla2,3): 
-                copia_orilla1 = copy.copy(orilla1)
-                copia_orilla2 = copy.copy(orilla2)
-                copia_orilla2.remove(3)
-                copia_orilla1.append(3)
-                copia_luz= copy.copy(luz)-3
-                if busquedaProfundidad([copia_orilla1,copia_orilla2,"Luz menos 3"],copia_luz):
-                    return True
-            
-            elif  BuscaExsitenciaSujeto(orilla1,1) and BuscaExsitenciaSujeto(orilla1,6):
-                copia_orilla1 = copy.copy(orilla1)
-                copia_orilla2 = copy.copy(orilla2)
-                copia_orilla1.remove(1)
-                copia_orilla1.remove(6)
-                copia_orilla2.append(1)
-                copia_orilla2.append(6)
-                copia_luz= copy.copy(luz)-6
-                if busquedaProfundidad([copia_orilla1,copia_orilla2,"Luz menos 6"],copia_luz):
-                    return True
-
-            elif  BuscaExsitenciaSujeto(orilla1,1) and BuscaExsitenciaSujeto(orilla1,8):
-                copia_orilla1 = copy.copy(orilla1)
-                copia_orilla2 = copy.copy(orilla2)
-                copia_orilla1.remove(1)
-                copia_orilla1.remove(8)
-                copia_orilla2.append(1)
-                copia_orilla2.append(8)
-                copia_luz= copy.copy(luz)-8
-                if busquedaProfundidad([copia_orilla1,copia_orilla2,"Luz menos 8"],copia_luz):
-                    return True
-            
-            elif  BuscaExsitenciaSujeto(orilla1,1) and BuscaExsitenciaSujeto(orilla1,12):
-                copia_orilla1 = copy.copy(orilla1)
-                copia_orilla2 = copy.copy(orilla2)
-                copia_orilla1.remove(1)
-                copia_orilla1.remove(12)
-                copia_orilla2.append(1)
-                copia_orilla2.append(12)
-                copia_luz= copy.copy(luz)-12
-                if busquedaProfundidad([copia_orilla1,copia_orilla2,"Luz menos 12"],copia_luz):
-                    return True
-            
-            
-            #Movimientos  con el 2 mas rapido
-            elif  BuscaExsitenciaSujeto(orilla1,3) and BuscaExsitenciaSujeto(orilla1,6):
-                copia_orilla1 = copy.copy(orilla1)
-                copia_orilla2 = copy.copy(orilla2)
-                copia_orilla1.remove(3)
-                copia_orilla1.remove(6)
-                copia_orilla2.append(3)
-                copia_orilla2.append(6)
-                copia_luz= copy.copy(luz)-6
-                if busquedaProfundidad([copia_orilla1,copia_orilla2,"Luz menos 6"],copia_luz):
-                    return True
-            
-            elif  BuscaExsitenciaSujeto(orilla1,3) and BuscaExsitenciaSujeto(orilla1,8):
-                copia_orilla1 = copy.copy(orilla1)
-                copia_orilla2 = copy.copy(orilla2)
-                copia_orilla1.remove(3)
-                copia_orilla1.remove(8)
-                copia_orilla2.append(3)
-                copia_orilla2.append(8)
-                copia_luz= copy.copy(luz)-8
-                if busquedaProfundidad([copia_orilla1,copia_orilla2,"Luz menos 8--"],copia_luz):
-                    return True
-
-            elif  BuscaExsitenciaSujeto(orilla1,3) and BuscaExsitenciaSujeto(orilla1,12):
-                copia_orilla1 = copy.copy(orilla1)
-                copia_orilla2 = copy.copy(orilla2)
-                copia_orilla1.remove(3)
-                copia_orilla1.remove(12)
-                copia_orilla2.append(3)
-                copia_orilla2.append(12)
-                copia_luz= copy.copy(luz)-12
-                if busquedaProfundidad([copia_orilla1,copia_orilla2,"Luz menos 12"],copia_luz):
-                    return True
-
-            #Movimientos con el tercero mas rapido 
-
-            elif  BuscaExsitenciaSujeto(orilla1,6) and BuscaExsitenciaSujeto(orilla1,8):
-                copia_orilla1 = copy.copy(orilla1)
-                copia_orilla2 = copy.copy(orilla2)
-                copia_orilla1.remove(6)
-                copia_orilla1.remove(8)
-                copia_orilla2.append(6)
-                copia_orilla2.append(8)
-                copia_luz= copy.copy(luz)-8
-                if busquedaProfundidad([copia_orilla1,copia_orilla2,"Luz menos 8aaaa"],copia_luz):
-                    return True
-            
-            elif  BuscaExsitenciaSujeto(orilla1,6) and BuscaExsitenciaSujeto(orilla1,12):
-                copia_orilla1 = copy.copy(orilla1)
-                copia_orilla2 = copy.copy(orilla2)
-                copia_orilla1.remove(6)
-                copia_orilla1.remove(12)
-                copia_orilla2.append(6)
-                copia_orilla2.append(12)
-                copia_luz= copy.copy(luz)-12
-                if busquedaProfundidad([copia_orilla1,copia_orilla2,"Luz menos 12"],copia_luz):
-                    return True
-           
-        #Regreso Destino Origen
-
-            
-
-
-            elif  BuscaExsitenciaSujeto(orilla2,6): 
-                copia_orilla1 = copy.copy(orilla1)
-                copia_orilla2 = copy.copy(orilla2)
-                copia_orilla2.remove(6)
-                copia_orilla1.append(6)
-                copia_luz= copy.copy(luz)-6
-                if busquedaProfundidad([copia_orilla1,copia_orilla2,"Luz menos 6--"],copia_luz):
-                    return True
-
-            elif  BuscaExsitenciaSujeto(orilla2,8): 
-                copia_orilla1 = copy.copy(orilla1)
-                copia_orilla2 = copy.copy(orilla2)
-                copia_orilla.remove(8)
-                copia_orilla1.append(8)
-                copia_luz= copy.copy(luz)-8
-                if busquedaProfundidad([copia_orilla1,copia_orilla2,"Luz menos 8"],copia_luz):
-                    return True
-            elif  BuscaExsitenciaSujeto(orilla2,12): 
-                copia_orilla1 = copy.copy(orilla1)
-                copia_orilla2 = copy.copy(orilla2)
-                copia_orilla.remove(12)
-                copia_orilla1.append(12)
-                copia_luz= copy.copy(luz)-12
-                if busquedaProfundidad([copia_orilla1,copia_orilla2,"Luz menos 12"],copia_luz):
-                    return True
-        List.pop()
-        return False
-
-if busquedaProfundidad(estInicio, lampara):
-    for i in List:
-        print(i)
