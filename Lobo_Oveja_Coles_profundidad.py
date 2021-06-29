@@ -112,7 +112,7 @@ dara inicio al ciclo for que imprimira toda la lista donde se encuentra los paso
  pila  recorriendolo con un for) para llegar al estado final
 Iniciamos el segundo estado de tiempo y restamos el tiempo final menos eltiempo inicial para poder ver el tiempo final 
 '''
-  
+  #Idea: Reestructra lo ya tenido en las reglas para que cada que haga un nodo lo busque implitamente y solo hagamos la busqueda de prof
   #Se va le largo el index
   List.pop()
   return False
