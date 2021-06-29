@@ -2,6 +2,7 @@ import copy
 import time
 
 
+
 '''
 Mapa con un barquero, 1 barco y 1 oveja, 1 caja de coles, 1 lobo y dos orillas
 separadas por un lago
@@ -10,14 +11,16 @@ Cada lista dentro de la listra representa una orilla en donde el objetivo es pas
 siguiendo las reglas que se estreblcerean mas adelantes
 '''
 estInicio = [["Lobo", "Coles", "Oveja"],[]]
+estFinal=3
 List=[]
+Ida= False
 
 '''
 Si la orilla destino, el elemento 2 de nuestra lista de listas tiene los 3 objetos que diga  con un true que  se ha completado todos los
 objetivos
 '''
-def EstadoFEncontrado(estado_inicial):
-    if len(estado_inicial[1])== 3:
+def OnePiece(estado_actual, estado_final):
+    if len(estado_actual)==estado_final:
         return True
     else:
         return False
@@ -30,6 +33,32 @@ def validacionExisObjeto(Orilla, Objeto):
     if i == Objeto:
       return True
   return False
+
+def reglas(estado_actual, sentido):
+  
+  orilla1= estado_inicial[0]
+  orilla2= estado_inicial[1]
+  #Validamos estado final o inicial
+  if validacionExisObjeto(orilla1,"Lobo") and validacionExisObjeto(orilla1,"Obeja") and validacionExisObjeto(orilla1,"Repollo"):
+    return True
+  if validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Repollo") and validacionExisObjeto(orilla2,"Lobo"):
+    return True
+
+
+  #Validamos si el movimiento fue de ida
+  if sentido == True:
+    if validacionExisObjeto(orilla1,"Obeja") and validacionExisObjeto(orilla1,"Repollo") and not validacionExisObjeto(orilla1,"Lobo"):
+      return False
+    if validacionExisObjeto(orilla1,"Obeja") and validacionExisObjeto(orilla1,"Lobo") and not validacionExisObjeto(orilla1,"Repollo"):
+      return False
+  #Validamos si el movimiento fue de regreso      
+  if sentido == False:
+    if validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Repollo") and not validacionExisObjeto(orilla2,"Lobo"):
+      return False
+    if validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Lobo") and not validacionExisObjeto(orilla2,"Repollo"):
+      return False
+  
+  return True
 
 '''
 Comenzamos la funcion de profundidad y agregamos el estado inicial a nuestra lista de soluciones
