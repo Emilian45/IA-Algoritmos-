@@ -59,7 +59,16 @@ def busquedaProfundidad(estado_actual, estado_final, sentido, tiempo ):
 
             if sentido == False:
                 cambiosentido= True
-                for x in
+                for x in orilla2:
+                    copia_orilla1=copy.copy(orilla1)
+                    copia_orilla2=copy.copy(orilla2)
+                    copia_orilla2.remove(a)
+                    copia_orilla1.append(a)
+                    copia_tiempo = copy.copy(tiempo)
+                    copia_tiempo= copia_tiempo - a
+                    
+
+
 
                         
 
