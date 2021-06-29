@@ -75,65 +75,26 @@ y comienze la verificacion de nuevo del nuevo estado sin haber guardado la lista
 mientras no llegue al tope
 '''
 
-def busquedaProfundidad(estado_inicial):
-  List.append(estado_inicial)
-  orilla1= estado_inicial[0]
-  orilla2= estado_inicial[1]
-  
-  if EstadoFEncontrado(estado_inicial):
-    return True
-  else:
-    #Verifica si la oveja esta en la orilla
-    if  Prof > len(List)-1:
-      if len(orilla1) >0:
-        if validacionExisObjeto (orilla1, "Oveja"):
-          copia_orilla1= copy.copy(orilla1)
-          copia_orilla2= copy.copy(orilla2)
-          copia_orilla1.remove("Oveja")
-          copia_orilla2.append("Oveja")
-          if busquedaProfundidad([copia_orilla1,copia_orilla2,"Deja la oveja"]):#Aqui se hace la magia de la recursividad 
-            return True
-    #Vericia si el lobo esta en la orilla
-        if validacionExisObjeto(orilla1,"Lobo") and validacionExisObjeto(orilla1,"Coles") and not validacionExisObjeto(orilla1,"Oveja") or validacionExisObjeto(orilla1,"Lobo") and  validacionExisObjeto(orilla,"Oveja") and not validacionExisObjeto(orilla1,"Coles"):
-          copia_orilla1= copy.copy(orilla1)
-          copia_orilla2= copy.copy(orilla2)
-          copia_orilla1.remove("Lobo")
-          copia_orilla2.append("Lobo")
-          if busquedaProfundidad([copia_orilla1,copia_orilla2,"Deja el lobo"]):#Aqui se hace la magia de la recursividad 
-            return True
+def busquedaProfundidad(estado_actual, estado_final, sentido):
+  if len(List)-1 < Prof:
+    List.append(estado_actual)
+    orilla1 = estado_actual[0]
+    orilla2 = estado_actual[1]
 
-        if validacionExisObjeto(orilla1,"Coles") and validacionExisObjeto(orilla1,"Lobo") and not validacionExisObjeto(orilla1,"Oveja") or validacionExisObjeto(orilla1,"Coles") and  validacionExisObjeto(orilla1,"Oveja") and not validacionExisObjeto(orilla1,"Lobo"):
-          copia_orilla1= copy.copy(orilla1)
-          copia_orilla2= copy.copy(orilla2)
-          copia_orilla1.remove("Coles")
-          copia_orilla2.append("Coles")
-          if busquedaProfundidad([copia_orilla1,copia_orilla2, "Deja las coles"]):#Aqui se hace la magia de la recursividad 
-            return True
 
-        if validacionExisObjeto(orilla2, "Oveja"):
-          copia_orilla1= copy.copy(orilla1)
-          copia_orilla2= copy.copy(orilla2)
-          copia_orilla2.remove("Oveja")
-          copia_orilla1.append("Oveja")
-          if busquedaProfundidad([copia_orilla1,copia_orilla2,"Regresa a la oveja"]):#Aqui se hace la magia de la recursividad 
-            return True
 
-            #Vericia si el lobo esta en la orilla
-        if validacionExisObjeto(orilla2,"Lobo") and validacionExisObjeto(orilla2,"Coles") and not validacionExisObjeto(orilla2,"Oveja") or validacionExisObjeto(orilla2,"Lobo") and  validacionExisObjeto(orilla2,"Oveja") and not validacionExisObjeto(orilla2,"Coles"):
-          copia_orilla1= copy.copy(orilla1)
-          copia_orilla2= copy.copy(orilla2)
-          copia_orilla2.remove("Lobo")
-          copia_orilla1.append("Lobo")
-          if busquedaProfundidad([copia_orilla1,copia_orilla2,"Regresa al lobo"]):#Aqui se hace la magia de la recursividad 
-            return True
 
-        if validacionExisObjeto(orilla2,"Coles") and validacionExisObjeto(orilla2,"Lobo") and not validacionExisObjeto(orilla2,"Oveja") or validacionExisObjeto(orilla2,"Coles") and  validacionExisObjeto(orilla2,"Oveja") and not validacionExisObjeto(orilla2,"Lobo"):
-          copia_orilla1= copy.copy(orilla1)
-          copia_orilla2= copy.copy(orilla2)
-          copia_orilla2.remove("Coles")
-          copia_orilla1.append("Coles")
-          if busquedaProfundidad([copia_orilla1,copia_orilla2,"Regresa las coles"]):#Aqui se hace la magia de la recursividad 
-            return True
+
+
+
+
+
+
+
+
+
+
+
 
 '''
 Iniciamos el tiempo, y despues ejecutamos elalgoritmo de busqueda en donde si sale retornara un True, imprimara el texto y 
