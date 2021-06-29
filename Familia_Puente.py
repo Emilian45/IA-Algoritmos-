@@ -66,7 +66,17 @@ def busquedaProfundidad(estado_actual, estado_final, sentido, tiempo ):
                     copia_orilla1.append(a)
                     copia_tiempo = copy.copy(tiempo)
                     copia_tiempo= copia_tiempo - a
+                    if busquedaProfundidad ([copia_orilla1,copia_orilla2, "Tiempo Restante: ", copia_tiempo], estado_final, cambiosentido, copia_tiempo):
+                        return True
                     
+            List.pop()
+            return False
+    return False
+
+if   busquedaProfundidad(estInicio, estFinal,Ida, lampara):
+    print("Llegaste a Laugh Tale")
+    for i in List:
+        print(i)
 
 
 
