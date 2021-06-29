@@ -80,6 +80,44 @@ def busquedaProfundidad(estado_actual, estado_final, sentido):
     List.append(estado_actual)
     orilla1 = estado_actual[0]
     orilla2 = estado_actual[1]
+    if OnePiece(orilla2, estado_final):
+      return True
+    else:
+
+      if sentido==False:
+        cambiosentido= True
+        for x in orilla1:
+          copia_orilla1 =copy.copy(orilla1)
+          copia_orilla2 =copy.copy(orilla2)
+          copia_orilla1.remove(x)
+          copia_orilla2.remove(x)
+
+          if busquedaProfundidad([copia_orilla1, copia_orilla2],estado_final,cambiosentido):
+            return True
+      
+      if sentido== True:
+        cambiosentido= False
+        for x in orilla2:
+          copia_orilla1 =copy.copy(orilla1)
+          copia_orilla2 =copy.copy(orilla2)
+          copia_orilla2.remove(x)
+          copia_orilla1.remove(x)
+
+          if busquedaProfundidad([copia_orilla1, copia_orilla2],estado_final,cambiosentido):
+            return True
+      List.pop()
+      return False
+  return False
+
+if busquedaProfundidad(estInicio,estFinal,Ida):
+  print("Llegaste a Laugh Tale")
+  for i in List:
+    print(i)
+
+
+
+
+
 
 
 
