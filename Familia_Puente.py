@@ -22,8 +22,37 @@ def OnePiece(estado_actual, estado_final):
 
 Prof = 20 #La maxima cantidad de estados aceptar en nuestra lista que trabaja como pila :p
 
-def busquedaProfundidad(estado_actual, estado_final, ):
+def busquedaProfundidad(estado_actual, estado_final, sentido, tiempo ):
+    if len(List)-1 < Prof and tiempo >0
+        List.append(estado_actual)
+        orilla1 = estado_actual[0]
+        orilla2= estado_actual[1]
+
+        if OnePiece(orilla2, estado_final):
+            return True
+        else:
+
+            if sentido == True:
+                cambiosentido= False
+                for x in orilla1:
+                    copia_orilla1= copy.copy(origen)
+                    copia_orilla1.remove(x)
+
+                    if len(orilla1) > 0:
+                        for y in copia_orilla1:
+
+                            copia2_orilla1= copy.copy(orilla1)
+
+                        
 
 
-if busquedaProfundidad(estInicio, lampara,sentido, tiempo):
+
+
+
+
+
+
+
+
+    
     
