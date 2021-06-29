@@ -42,6 +42,24 @@ def busquedaProfundidad(estado_actual, estado_final, sentido, tiempo ):
                         for y in copia_orilla1:
 
                             copia2_orilla1= copy.copy(orilla1)
+                            copia_orilla2= copy.copy(orilla2)
+                            copia2_orilla1=remove(x)
+                            copia2_orilla1=remove(y)
+                            copia_orilla2= append(x)
+                            copia_orilla2= append(y)
+                            copia_tiempo = copu.copy(tiempo)
+                            if x-y > 0:
+                                copia_tiempo = copia_tiempo - x
+                                if busquedaProfundidad([copia2_orilla1,copia_orilla2, "Tiempo Restante: ", copia_tiempo], estado_final, cambiosentido, copia_tiempo)
+                                return True
+                            else:
+                                copia_tiempo = copia_tiempo - y
+                                if busquedaProfundidad([copia2_orilla1,copia_orilla2, "Tiempo Restante: ", copia_tiempo], estado_final, cambiosentido, copia_tiempo)
+                                return True
+
+            if sentido == False:
+                cambiosentido= True
+                for x in
 
                         
 
