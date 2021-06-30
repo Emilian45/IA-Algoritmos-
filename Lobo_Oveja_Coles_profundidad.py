@@ -10,7 +10,7 @@ Donde  el barquero y el barco seran el cambio  entre la lista de listas
 Cada lista dentro de la listra representa una orilla en donde el objetivo es pasar  todos los objetos de una lista a otra lista dentro de la lista 
 siguiendo las reglas que se estreblcerean mas adelantes
 '''
-estInicio = [["Lobo", "Coles", "Oveja"],[]]
+estInicio = [["Lobo", "Obeja", "Coles"],[]]
 estFinal=3
 List=[]
 Ida= False
@@ -32,40 +32,42 @@ def validacionExisObjeto(Orilla, Objeto):
   for i in Orilla:
     if i == Objeto:
       return True
-  return False
+  else:
+    return False
 
-def reglas(estado_actual, sentido):
-  
-  orilla1= estado_inicial[0]
-  orilla2= estado_inicial[1]
+def reglas(estado_inicial,sentido):
+  orilla1  = estado_inicial[0]
+  orilla2 = estado_inicial[1]
   #Validamos estado final o inicial
-  if validacionExisObjeto(orilla1,"Lobo") and validacionExisObjeto(orilla1,"Obeja") and validacionExisObjeto(orilla1,"Repollo"):
+  if validacionExisObjeto(orilla1,"Lobo") and validacionExisObjeto(orilla1,"Obeja") and validacionExisObjeto(orilla1,"Coles"):
     return True
-  if validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Repollo") and validacionExisObjeto(orilla2,"Lobo"):
+  if validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Coles") and validacionExisObjeto(orilla2,"Lobo"):
     return True
 
 
   #Validamos si el movimiento fue de ida
-  if sentido == True:
-    if validacionExisObjeto(orilla1,"Obeja") and validacionExisObjeto(orilla1,"Repollo") and not validacionExisObjeto(orilla1,"Lobo"):
+  if sentido == 1:
+    if validacionExisObjeto(orilla1,"Obeja") and validacionExisObjeto(orilla1,"Coles") and not validacionExisObjeto(orilla1,"Lobo"):
       return False
-    if validacionExisObjeto(orilla1,"Obeja") and validacionExisObjeto(orilla1,"Lobo") and not validacionExisObjeto(orilla1,"Repollo"):
+    if validacionExisObjeto(orilla1,"Obeja") and validacionExisObjeto(orilla1,"Lobo") and not validacionExisObjeto(orilla1,"Coles"):
       return False
   #Validamos si el movimiento fue de regreso      
-  if sentido == False:
-    if validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Repollo") and not validacionExisObjeto(orilla2,"Lobo"):
+  if sentido == 0:
+    if validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Coles") and not validacionExisObjeto(orilla2,"Lobo"):
       return False
-    if validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Lobo") and not validacionExisObjeto(orilla2,"Repollo"):
+    if validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Lobo") and not validacionExisObjeto(orilla2,"Coles"):
       return False
   
   return True
+ 
+   
 
 '''
 Comenzamos la funcion de profundidad y agregamos el estado inicial a nuestra lista de soluciones
 Establecemos en base a la lista de listas cada elemento lista dentro de la lista sera una orilla a ala cual cruzar
 establecemos la profundidad 
 '''
-Prof = 10 #La maxima cantidad de estados aceptar en nuestra cola
+Prof = 20 #La maxima cantidad de estados aceptar en nuestra cola
 
 
 '''
@@ -75,63 +77,50 @@ y comienze la verificacion de nuevo del nuevo estado sin haber guardado la lista
 mientras no llegue al tope
 '''
 
-def busquedaProfundidad(estado_actual, estado_final, sentido):
-  if len(List)-1 < Prof:
-    List.append(estado_actual)
-    orilla1 = estado_actual[0]
-    orilla2 = estado_actual[1]
-    if OnePiece(orilla2, estado_final):
-      return True
-    else:
+def busquedaProfundidad(estado_actual, estado_final, sentido, abajo):
+  if reglas(estado_actual,sentido):   
+    if len(List)-1 < Prof: 
+      List.append(estado_actual)
+      orilla1 = estado_actual[0]
+      orilla2 = estado_actual[1]
+      if OnePiece(orilla2, estado_final):
+        return True
+      else:
 
-      if sentido==False:
-        cambiosentido= True
-        for x in orilla1:
-          copia_orilla1 =copy.copy(orilla1)
-          copia_orilla2 =copy.copy(orilla2)
-          copia_orilla1.remove(x)
-          copia_orilla2.remove(x)
+        if sentido==False:
+          cambiosentido= True
+          for x in orilla1:
+            copia_orilla1 =copy.copy(orilla1)
+            copia_orilla2 =copy.copy(orilla2)
+            copia_orilla1.remove(x)
+            copia_orilla2.append(x)
+            copia_prof= copy.copy(abajo)
+            copia_prof= copia_prof-1
 
-          if busquedaProfundidad([copia_orilla1, copia_orilla2],estado_final,cambiosentido):
-            return True
-      
-      if sentido== True:
-        cambiosentido= False
-        for x in orilla2:
-          copia_orilla1 =copy.copy(orilla1)
-          copia_orilla2 =copy.copy(orilla2)
-          copia_orilla2.remove(x)
-          copia_orilla1.remove(x)
+            if busquedaProfundidad([copia_orilla1, copia_orilla2],estado_final,cambiosentido,copia_prof ):
+              return True
 
-          if busquedaProfundidad([copia_orilla1, copia_orilla2],estado_final,cambiosentido):
-            return True
-      List.pop()
-      return False
+        if sentido== True:
+          cambiosentido= False
+          copia_prof= copy.copy(abajo)
+          copia_prof= copia_prof-1
+          if busquedaProfundidad([orilla1, orilla2],estado_final,cambiosentido,copia_prof ):
+              return True
+                
+        if sentido== True:
+          cambiosentido= False
+          for x in orilla2:
+            copia_orilla1 =copy.copy(orilla1)
+            copia_orilla2 =copy.copy(orilla2)
+            copia_orilla2.remove(x)
+            copia_orilla1.append(x)
+            copia_prof= copy.copy(abajo)
+            copia_prof= copia_prof-1
+            if busquedaProfundidad([copia_orilla1, copia_orilla2],estado_final,cambiosentido,copia_prof ):
+              return True
+        List.pop()
+        return False
   return False
-
-if busquedaProfundidad(estInicio,estFinal,Ida):
-  print("Llegaste a Laugh Tale")
-  for i in List:
-    print(i)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 '''
@@ -140,14 +129,15 @@ dara inicio al ciclo for que imprimira toda la lista donde se encuentra los paso
  pila  recorriendolo con un for) para llegar al estado final
 Iniciamos el segundo estado de tiempo y restamos el tiempo final menos eltiempo inicial para poder ver el tiempo final 
 '''
-  #Idea: Reestructra lo ya tenido en las reglas para que cada que haga un nodo lo busque implitamente y solo hagamos la busqueda de prof
-  #Se va le largo el index
-  List.pop()
-  return False
+
 profundidad_inicio = time.time()
-if busquedaProfundidad(estInicio):
+if busquedaProfundidad(estInicio,estFinal,Ida, Prof):
+  print("Llegaste a Laugh Tale")
   for i in List:
     print(i)
 profundidad_final= time.time()
 print("\nBúsqueda finalizada en",profundidad_final - profundidad_inicio,"segundos\n")
  
+
+
+
