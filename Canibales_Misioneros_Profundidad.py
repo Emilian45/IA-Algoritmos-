@@ -136,6 +136,7 @@ def busquedaProfundidad(estado_inicial, direccion):
 
     List.pop()
     return False
+    #Comenzamos con el rework!
 
 if busquedaProfundidad(estInicio,dir):
   print("Solucion encontrada")
