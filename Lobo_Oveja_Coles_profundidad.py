@@ -46,13 +46,13 @@ def reglas(estado_inicial,sentido):
 
 
   #Validamos si el movimiento fue de ida
-  if sentido == 1:
+  if sentido == True:
     if validacionExisObjeto(orilla1,"Obeja") and validacionExisObjeto(orilla1,"Coles") and not validacionExisObjeto(orilla1,"Lobo"):
       return False
     if validacionExisObjeto(orilla1,"Obeja") and validacionExisObjeto(orilla1,"Lobo") and not validacionExisObjeto(orilla1,"Coles"):
       return False
   #Validamos si el movimiento fue de regreso      
-  if sentido == 0:
+  if sentido == False:
     if validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Coles") and not validacionExisObjeto(orilla2,"Lobo"):
       return False
     if validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Lobo") and not validacionExisObjeto(orilla2,"Coles"):

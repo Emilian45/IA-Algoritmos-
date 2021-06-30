@@ -34,7 +34,7 @@ def busquedaProfundidad(estado_actual, estado_final, sentido, tiempo ):
 
             if sentido == False:
                 cambiosentido= True
-                
+                ''' Iteramos que el elemento x este dentro de nuestra orilla1  '''
                 for x in orilla1:
                     copia_orilla1= copy.copy(orilla1)
                     copia_orilla1.remove(x)

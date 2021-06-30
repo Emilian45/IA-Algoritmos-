@@ -11,21 +11,41 @@ cada que se mueve de una orilla asi alternando las condicionales if y que tenga 
 '''
 
 estInicio= [["Canibal","Canibal","Canibal","Misionero","Misionero","Misionero"],[]]
+#Aprendi que es mejor tener un estado final a cual ir claramente como con las ranas
+estFinal= [[],["Canibal","Canibal","Canibal","Misionero","Misionero","Misionero"]]
 List=[]
-dir=0
+index=0
+Ida= True
 
-def EstadoFEncontrado(estado_inicial):
-    if len(estado_inicial[1])==6:
+def OnePiece(estado_actual, estado_final):
+    if len(estado_actual)==estado_final:
         return True
     else:
         return False
 
-def BusquedaCanibal(Orilla):
-  Canibal  = 0
+def BusquedaPersona(Orilla,Persona):
   for i in Orilla:
-    if i == "Canibal":
-      Canibal += 1 
-  return Canibal
+    if i == Persona:
+      index += 1 
+  return index
+
+def reglas(estado_inicial,sentido):
+  orilla1  = estado_inicial[0]
+  orilla2 = estado_inicial[1]
+
+  if sentido == True:
+    if validacionExisObjeto(orilla1,"Obeja") and validacionExisObjeto(orilla1,"Coles") and not validacionExisObjeto(orilla1,"Lobo"):
+      return False
+    if validacionExisObjeto(orilla1,"Obeja") and validacionExisObjeto(orilla1,"Lobo") and not validacionExisObjeto(orilla1,"Coles"):
+      return False
+  #Validamos si el movimiento fue de regreso      
+  if sentido == 0:
+    if validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Coles") and not validacionExisObjeto(orilla2,"Lobo"):
+      return False
+    if validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Lobo") and not validacionExisObjeto(orilla2,"Coles"):
+      return False
+  
+  return True
 
 def BusquedaMisionero(Orilla):
   Misionero = 0

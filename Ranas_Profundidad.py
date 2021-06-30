@@ -41,7 +41,7 @@ y se copiara el estado en el que se encuentra y mandarlo dentro de la lista recu
 y si no lo es hara de nuevo la busqueda entr los posibles movimientos, asi en u  ciclo hasta que  encuentre
 '''
 Prof = 20 #La maxima cantidad de estados aceptar en nuestra cola
-
+#Aislaremos las reglas para que la profundidad haga lo suyo
 def busquedaProfundidad(estado_inicial,estado_final):
   lista.append(estado_inicial) #Comenzamos agregando el estado inicial a la lista para tener nuestro primer nodo
   if EstadoFEncontrado(estado_inicial,estado_final) and len(lista)-1 < Prof:
