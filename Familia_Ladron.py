@@ -69,5 +69,21 @@ def busquedaProfundidad(estado_actual, estado_final, sentido, abajo):
             return True
 
         else:
-            
+            if direccion==False:
+                cambiosentido= True
+                for x in orilla1:
+                    copia_orilla1= copy.copy(orilla1)
+                    copia_orilla1.remove(x)
+                    for y in copia_prolla1:
+                        copia2_prolla1 = copy.copy(orilla1)
+                        copia_orilla2 = copy.copy(orilla1)
+                        copia2_prolla1.remove(x)
+                        copia2_prolla1.remove(y)
+                        copia_orilla2.append(x)
+                        copia_orilla2.append(y)
+                        if busquedaProfundidad([copia2_prolla1,copia_orilla2], estado_final,cambiosentido, copia_profundidad):
+                            return True
+                            
+
+
 
