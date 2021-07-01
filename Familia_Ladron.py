@@ -28,14 +28,15 @@ def validacionExisObjeto(Orilla, Objeto):
 def reglas(estado_actual,sentido):
     orilla1=estado_actual[0]
     orilla2=estado_actual[1]
+    totalel = len(orilla1) + len(orilla2)
 
     if len(orilla1) > 0 and len(orilla2) > 0 or len(orilla1) == 0 and len(orilla2) == totalel:
 
-        if direc == True:
+        if sentido == True:
             if orilla2[len(orilla2) - 1] == "Hijo" or orilla2[len(orilla2) - 1] == "Hija" or orilla2[len(orilla2) - 1] == "Cholo":
                 return False
 
-        if direc == False:
+        if sentido == False:
             if orilla1[len(orilla1) - 1] == "Hijo" or orilla1[len(orilla1) - 1] == "Hija" or orilla1[len(orilla1) - 1] == "Cholo":
                 return False
         '''
@@ -74,7 +75,7 @@ def busquedaProfundidad(estado_actual, estado_final, sentido, abajo):
                 for x in orilla1:
                     copia_orilla1= copy.copy(orilla1)
                     copia_orilla1.remove(x)
-                    for y in copia_prolla1:
+                    for y in copia_orilla1:
                         copia2_orilla1 = copy.copy(orilla1)
                         copia_orilla2 = copy.copy(orilla1)
                         copia2_orilla1.remove(x)
@@ -105,6 +106,8 @@ def busquedaProfundidad(estado_actual, estado_final, sentido, abajo):
                         copia2_orilla2.append(X)
                         copia_orilla1.append(y)
                         if busquedaProfundidad([copia_orilla1,copia_orilla2], estado_final,cambiosentido, copia_profundidad):
+                          return True
+
             List.pop()
         return False
 
@@ -112,8 +115,3 @@ if  busquedaProfundidad(estInicio, estFinal,Ida, Prof):
     print("Llegaste a Laugh Tale")
     for a in List:
         print(a)
-else:
-    print("Solucion no encontrada")
-
-
-            
