@@ -55,3 +55,19 @@ def reglas(estado_actual,sentido):
             return orilla1
 
   return True
+
+Prof=20
+
+def busquedaProfundidad(estado_actual, estado_final, sentido, abajo):
+    if len(List)-1 < Prof and reglas(estado_actual, abajo):
+        List.append(estado_actual)
+        orilla1= estado_actual[0] 
+        orilla2= estado_actual[1]
+        copia_profundidad =copy.copy(abajo)
+
+        if OnePiece(orilla2,estado_final):
+            return True
+
+        else:
+            
+
