@@ -14,6 +14,7 @@ List= Sera en donde guardemos nuestros estados
 estInicio = [[["R","R","R","V","S","S","S"]]]
 estFinal   = ["S","S","S","V","R","R","R"]
 List = []
+variableparaWhile=False
 
 '''
 Definimos una funcion que nos retornasra el valore de i el cual sera el lugar del espacio vacio encontrado (roca vacia)
@@ -37,44 +38,41 @@ def reglas(estado_inicial):
   
   #Movimiento Rana Marrón 1
   if i+1 <= len(estado_inicial)-1 and estado_inicial[i+1] == "S":
-    aux = copy.copy(estado_inicial)
-    aux[i] = "S"
-    aux[i+1] = "V"
-    listaAux.append(aux)
+    copia_estadoActual = copy.copy(estado_inicial)
+    copia_estadoActual[i] = "S"
+    copia_estadoActual[i+1] = "V"
+    listaAux.append(copia_estadoActual)
 
   #Movimiento Rana verde 2
   if i-2 >= 0 and estado_inicial[i-2] == "R":
-    aux = copy.copy(estado_inicial)
-    aux[i] = "R"
-    aux[i-2] = "V"
-    listaAux.append(aux)  
+    copia_estadoActual = copy.copy(estado_inicial)
+    copia_estadoActual[i] = "R"
+    copia_estadoActual[i-2] = "V"
+    listaAux.append(copia_estadoActual)  
   
   #Movimiento Rana Marrón 2
   if i+2 <= len(estado_inicial)-1 and estado_inicial[i+2] == "S":
-    aux = copy.copy(estado_inicial)
-    aux[i] = "S"
-    aux[i+2] = "V"
-    listaAux.append(aux)
+    copia_estadoActual = copy.copy(estado_inicial)
+    copia_estadoActual[i] = "S"
+    copia_estadoActual[i+2] = "V"
+    listaAux.append(copia_estadoActual)
   
   #Movimiento Rana verde 1
   if i-1 >= 0 and estado_inicial[i-1] == "R":
-    aux = copy.copy(estado_inicial)
-    aux[i] = "R"
-    aux[i-1] = "V"
-    listaAux.append(aux)
+    copia_estadoActual = copy.copy(estado_inicial)
+    copia_estadoActual[i] = "R"
+    copia_estadoActual[i-1] = "V"
+    listaAux.append(copia_estadoActual)
   
   return listaAux  
 
 def busquedaProfundidad(estado_inicial,estado_final):
-  
-  bandera = False
-  
-  while bandera == False:
-    aux = copy.copy(estado_inicial) #Copiamos la lista de estados actuales en un auxiliar
+  while variableparaWhile == False:
+    copia_estadoActual = copy.copy(estado_inicial) #Copiamos la lista de estados actuales en un auxiliar
     estado_inicial.clear()          #Limpiamos el estado Actual
     ListaDeListas = []  #Una Lista de Listas Auxiliar
 
-    for a in aux: #Recorremos  toda  la  lista  de  listas  medainte  un  for  y  una  varaible  a  que  apunta  a  la  lista   de   listas   actual
+    for a in copia_estadoActual: #Recorremos  toda  la  lista  de  listas  medainte  un  for  y  una  varaible  a  que  apunta  a  la  lista   de   listas   actual
       opciones = reglas(a[len(a)-1]) #Obtenemos una lista de todos los posibles movimientos de la ultima posicion de la lista guarada en a
       for i in opciones:#Recorremos  esa  lista  de  posibles   movminetos  con   un   for
         cca = copy.copy(a)#Creamos una copia de la lista a para  cada  posible  movimiento
@@ -103,4 +101,3 @@ profundidad_final= time.time()
 print("\nBúsqueda finalizada en",profundidad_final - profundidad_inicio,"segundos\n")
 
   
-
