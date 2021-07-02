@@ -15,3 +15,10 @@ List= Sera en donde guardemos nuestros estados
 estInicio = ["R","R","R","V","S","S","S"]  
 estFinal  = ["S","S","S","V","R","R","R"]
 lista = []
+
+def OnePiece(estado_inicial,estado_final):
+    for i in range(len(estado_inicial)):
+        if estado_inicial[i] != estado_final[i]:
+          return False
+    return True
+    

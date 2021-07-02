@@ -21,7 +21,7 @@ Definimos la comparacion que se realizara de los elementos dentro de losa rreglo
 Mientras no encuentres ninguna similitud dentro de los elementos  returna un false 
 '''
 
-def EstadoFEncontrado(estado_inicial,estado_final):
+def OnePiece(estado_inicial,estado_final):
     for i in range(len(estado_inicial)):
         if estado_inicial[i] != estado_final[i]:
           return False
@@ -44,7 +44,7 @@ Prof = 20 #La maxima cantidad de estados aceptar en nuestra cola
 #Aislaremos las reglas para que la profundidad haga lo suyo
 def busquedaProfundidad(estado_inicial,estado_final):
   lista.append(estado_inicial) #Comenzamos agregando el estado inicial a la lista para tener nuestro primer nodo
-  if EstadoFEncontrado(estado_inicial,estado_final) and len(lista)-1 < Prof:
+  if OnePiece(estado_inicial,estado_final) and len(lista)-1 < Prof:
       return True #Si encuentras la solucion ya salte amigo
   else: #Si no haras los siguientes pasos para resolver el problema de la vida
       i=busquedaEspacioVacio(estado_inicial) 
