@@ -87,7 +87,7 @@ Iniciamos el segundo estado de tiempo y restamos el tiempo final menos eltiempo 
 profundidad_inicio = time.time()
 
 if busquedaProfundidad(estInicio,estFinal):
-  print("Encontrado")
+  print("Llegaste a Laugh Tale")
   for i in lista:
     print(i)
 
