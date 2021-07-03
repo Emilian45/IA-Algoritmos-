@@ -13,6 +13,7 @@ siguiendo las reglas que se estreblcerean mas adelantes
 estInicio = [[[["Lobo", "Obeja", "Coles"],[]]]]
 estFinal=["Lobo","Obeja","Coles"]
 List=[]
+ListAux = []
 Ida= False
 
 '''
@@ -38,6 +39,19 @@ def reglas(estado_inicial,sentido):
   orilla1  = estado_inicial[0]
   orilla2 = estado_inicial[1]
   #Validamos estado final o inicial
+
+  if sentido=True
+    if validacionExisObjeto(orilla1, "Obeja"):
+        copia_orilla1 = copy.copy(orilla1)
+        copia_orilla2 = copy.copy(orilla2)
+        copia_orilla1.remove("Obeja")
+        copia_orilla2.append("Obeja")
+        ListAux.append([copia_orilla1,copia_orilla2])
+
+    #si quiero  hacer esto acabo de tener en ceunta que tengo un archivo con todo asi
+
+
+
   if validacionExisObjeto(orilla1,"Lobo") and validacionExisObjeto(orilla1,"Obeja") and validacionExisObjeto(orilla1,"Coles"):
     return True
   if validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Coles") and validacionExisObjeto(orilla2,"Lobo"):
