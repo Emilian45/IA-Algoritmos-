@@ -41,13 +41,7 @@ def reglas(estado_inicial,sentido):
   #Validamos estado final o inicial
 
   if sentido=True
-    if validacionExisObjeto(orilla1, "Obeja"):
-        copia_orilla1 = copy.copy(orilla1)
-        copia_orilla2 = copy.copy(orilla2)
-        copia_orilla1.remove("Obeja")
-        copia_orilla2.append("Obeja")
-        ListAux.append([copia_orilla1,copia_orilla2])
-
+    
     #si quiero  hacer esto acabo de tener en ceunta que tengo un archivo con todo asi
     if validacionExisObjeto (orilla1, "Oveja"):
           copia_orilla1= copy.copy(orilla1)
