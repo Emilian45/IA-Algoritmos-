@@ -49,27 +49,48 @@ def reglas(estado_inicial,sentido):
         ListAux.append([copia_orilla1,copia_orilla2])
 
     #si quiero  hacer esto acabo de tener en ceunta que tengo un archivo con todo asi
+    if validacionExisObjeto (orilla1, "Oveja"):
+          copia_orilla1= copy.copy(orilla1)
+          copia_orilla2= copy.copy(orilla2)
+          copia_orilla1.remove("Oveja")
+          copia_orilla2.append("Oveja")
+          ListAux.append([copia_orilla1,copia_orilla2])
+    #Vericia si el lobo esta en la orilla
+        if validacionExisObjeto(orilla1,"Lobo") and validacionExisObjeto(orilla1,"Coles") and not validacionExisObjeto(orilla1,"Oveja") or validacionExisObjeto(orilla1,"Lobo") and  validacionExisObjeto(orilla,"Oveja") and not validacionExisObjeto(orilla1,"Coles"):
+          copia_orilla1= copy.copy(orilla1)
+          copia_orilla2= copy.copy(orilla2)
+          copia_orilla1.remove("Lobo")
+          copia_orilla2.append("Lobo")
+          ListAux.append([copia_orilla1,copia_orilla2])
 
+        if validacionExisObjeto(orilla1,"Coles") and validacionExisObjeto(orilla1,"Lobo") and not validacionExisObjeto(orilla1,"Oveja") or validacionExisObjeto(orilla1,"Coles") and  validacionExisObjeto(orilla1,"Oveja") and not validacionExisObjeto(orilla1,"Lobo"):
+          copia_orilla1= copy.copy(orilla1)
+          copia_orilla2= copy.copy(orilla2)
+          copia_orilla1.remove("Coles")
+          copia_orilla2.append("Coles")
+          ListAux.append([copia_orilla1,copia_orilla2])
 
+        if validacionExisObjeto(orilla2, "Oveja"):
+          copia_orilla1= copy.copy(orilla1)
+          copia_orilla2= copy.copy(orilla2)
+          copia_orilla2.remove("Oveja")
+          copia_orilla1.append("Oveja")
+          ListAux.append([copia_orilla1,copia_orilla2])
 
-  if validacionExisObjeto(orilla1,"Lobo") and validacionExisObjeto(orilla1,"Obeja") and validacionExisObjeto(orilla1,"Coles"):
-    return True
-  if validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Coles") and validacionExisObjeto(orilla2,"Lobo"):
-    return True
+            #Vericia si el lobo esta en la orilla
+        if validacionExisObjeto(orilla2,"Lobo") and validacionExisObjeto(orilla2,"Coles") and not validacionExisObjeto(orilla2,"Oveja") or validacionExisObjeto(orilla2,"Lobo") and  validacionExisObjeto(orilla2,"Oveja") and not validacionExisObjeto(orilla2,"Coles"):
+          copia_orilla1= copy.copy(orilla1)
+          copia_orilla2= copy.copy(orilla2)
+          copia_orilla2.remove("Lobo")
+          copia_orilla1.append("Lobo")
+          ListAux.append([copia_orilla1,copia_orilla2])
 
+        if validacionExisObjeto(orilla2,"Coles") and validacionExisObjeto(orilla2,"Lobo") and not validacionExisObjeto(orilla2,"Oveja") or validacionExisObjeto(orilla2,"Coles") and  validacionExisObjeto(orilla2,"Oveja") and not validacionExisObjeto(orilla2,"Lobo"):
+          copia_orilla1= copy.copy(orilla1)
+          copia_orilla2= copy.copy(orilla2)
+          copia_orilla2.remove("Coles")
+          copia_orilla1.append("Coles")
+          ListAux.append([copia_orilla1,copia_orilla2])
 
-  #Validamos si el movimiento fue de ida
-  if sentido == True:
-    if validacionExisObjeto(orilla1,"Obeja") and validacionExisObjeto(orilla1,"Coles") and not validacionExisObjeto(orilla1,"Lobo"):
-      return False
-    if validacionExisObjeto(orilla1,"Obeja") and validacionExisObjeto(orilla1,"Lobo") and not validacionExisObjeto(orilla1,"Coles"):
-      return False
-  #Validamos si el movimiento fue de regreso      
-  if sentido == False:
-    if validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Coles") and not validacionExisObjeto(orilla2,"Lobo"):
-      return False
-    if validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Lobo") and not validacionExisObjeto(orilla2,"Coles"):
-      return False
-  
-  return True
+#Quite la recursividad de este archivo que tenia y agrege la parte del agrega a la lista
  
