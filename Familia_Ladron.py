@@ -42,17 +42,17 @@ def reglas(estado_actual,sentido):
         '''
         Validamos que ningun miembro se quede solo con el orilla2 sin la presencia del policia 
         '''
-        if len(orilla1) >= 2 and busca(orilla1,"orilla2") and not busca(orilla1,"Policia") or len(orilla2) >= 2 and busca(orilla2,"orilla2") and not busca(orilla2,"Policia"):
+        if len(orilla1) >= 2 and validacionExisObjeto(orilla1,"Cholo") and not validacionExisObjeto(orilla1,"Policia") or len(orilla2) >= 2 and validacionExisObjeto(orilla2,"Cholo") and not validacionExisObjeto(orilla2,"Policia"):
             return False
         '''
         Validamos que ningun hijo se quede solo con la Madre sin la presencia del Padre 
         '''
-        if busca(orilla1,"Hijo") and busca(orilla1,"Madre") and not busca(orilla1,"Padre") or busca(orilla2,"Hijo") and busca(orilla2,"Madre") and not busca(orilla2,"Padre"):
+        if validacionExisObjeto(orilla1,"Hijo") and validacionExisObjeto(orilla1,"Madre") and not validacionExisObjeto(orilla1,"Padre") or validacionExisObjeto(orilla2,"Hijo") and validacionExisObjeto(orilla2,"Madre") and not validacionExisObjeto(orilla2,"Padre"):
             return False
         '''
         Validamos que ninguna Hija se quede solo con el Padre sin la presencia de la Madre 
         '''
-        if busca(orilla1,"Hija") and busca(orilla1,"Padre") and not busca(orilla1,"Madre") or busca(orilla2,"Hija") and busca(orilla2,"Padre") and not busca(orilla2,"Madre"):
+        if validacionExisObjeto(orilla1,"Hija") and validacionExisObjeto(orilla1,"Padre") and not validacionExisObjeto(orilla1,"Madre") or validacionExisObjeto(orilla2,"Hija") and validacionExisObjeto(orilla2,"Padre") and not validacionExisObjeto(orilla2,"Madre"):
             return orilla1
 
     return True
@@ -70,7 +70,7 @@ def busquedaProfundidad(estado_actual, estado_final, sentido, abajo):
             return True
 
         else:
-            if direccion==False:
+            if sentido==False:
                 cambiosentido= True
                 for x in orilla1:
                     copia_orilla1= copy.copy(orilla1)
@@ -84,16 +84,16 @@ def busquedaProfundidad(estado_actual, estado_final, sentido, abajo):
                         copia_orilla2.append(y)
                         if busquedaProfundidad([copia2_orilla1,copia_orilla2], estado_final,cambiosentido, copia_profundidad):
                             return True
-            if direccion==True:
+            if sentido==True:
                 cambiosentido= False
                 for x in orilla1:
-                    copia_prolla1 = copy.copy(orilla1)
+                    copia_orilla1 = copy.copy(orilla1)
                     copia_orilla2 = copy.copy(orilla2)
-                    copia_prolla1.remove(x)
-                    copia_prolla1.append(x)
+                    copia_orilla1.remove(x)
+                    copia_orilla1.append(x)
                     if busquedaProfundidad([copia_orilla1,copia_orilla2], estado_final,cambiosentido, copia_profundidad):
                         return True
-            if direccion==True:
+            if sentido==True:
                 cambiosentido= False
                 for x in orilla1:
                     copia_orilla2= copy.copy(orilla2)
@@ -102,8 +102,8 @@ def busquedaProfundidad(estado_actual, estado_final, sentido, abajo):
                         copia2_orilla2 = copy.copy(orilla2)
                         copia_orilla1 = copy.copy(orilla1)
                         copia2_orilla2.remove(x)
-                        copia_orilla1.remove(y)
-                        copia2_orilla2.append(X)
+                        copia2_orilla2.remove(y)
+                        copia_orilla1.append(x)
                         copia_orilla1.append(y)
                         if busquedaProfundidad([copia_orilla1,copia_orilla2], estado_final,cambiosentido, copia_profundidad):
                           return True
