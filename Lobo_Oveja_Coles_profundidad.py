@@ -15,7 +15,7 @@ Ida= False #Nos dara el sentido de movmineto en donde si visualizaramos el arbol
 
 '''
 Si la orilla destino, el elemento 2 de nuestra lista de listas tiene los 3 objetos que diga  con un true que  se ha completado todos los
-objetivos, solo con una pequeña modificacion
+objetivos, solo con una pequeña modificacion agregando nuestro toque personal en cuanto a referencias otakus[Nota no servira esto para anchura]
 '''
 def OnePiece(estado_actual, estado_final):
     if len(estado_actual)==estado_final:
@@ -126,8 +126,11 @@ Iniciamos el segundo estado de tiempo y restamos el tiempo final menos eltiempo 
 profundidad_inicio = time.time()
 if busquedaProfundidad(estInicio,estFinal,Ida):
   print("Llegaste a Laugh Tale")
+  print("|")
+  print("v")
   for i in List:
     print(i)
+
 profundidad_final= time.time()
 print("\nBúsqueda finalizada en",profundidad_final - profundidad_inicio,"segundos\n")
  
