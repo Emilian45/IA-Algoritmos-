@@ -65,7 +65,7 @@ def reglas(estado_inicial,sentido):
 
   return True
 
-Prof=20
+Prof=20  #La maxima cantidad de estados aceptar en nuestra lista que trabaja como pila :p
 
 def busquedaProfundidad(estado_inicial,estado_final,sentido):
   if len(List)-1 < Prof:
