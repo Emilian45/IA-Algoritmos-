@@ -1,17 +1,24 @@
 import copy
 import time
 
+
+
 estInicio = [["Policia","Ladron","Padre","Hijo","Hijo","Madre","Hija","Hija"],[]]
 estFinal   = [[],["Policia","Ladron","Padre","Hijo","Hijo","Madre","Hija","Hija"]]
 profundidad = 20
 ida = False
 List = []
-
+'''
+Si la orilla destino, el elemento 2 de nuestra lista de listas tiene el estado final, que diga  con un true que  se ha completado todos los
+objetivos, solo con una pequeña modificacion agregando nuestro toque personal en cuanto a referencias otakus[Nota no servira esto para anchura]
+'''
 def OnePiece(estado_inicial,estado_final):
   if len(estado_inicial) == len(estado_final):
     return True
   return False
 
+'''Que retorne  un True si en la orilla que digamos exista el objeto que igual digamos para estar viendo asi hacer las reglas
+'''
 def validacionExisObjeto(Orilla,Objeto):
   for i in Orilla:
     if i == Objeto:
@@ -60,11 +67,9 @@ def reglas(estado_inicial,sentido):
 
 Prof=20
 
-def busquedaProfundidad(estado_inicial,estado_final,sentido,prof):
+def busquedaProfundidad(estado_inicial,estado_final,sentido):
   if len(List)-1 < Prof:
     if reglas(estado_inicial,sentido):
-      copia_profundidad = copy.copy(prof)
-      copia_profundidad -= 1
       List.append(estado_inicial)
       orilla1  = estado_inicial[0]
       orilla2 = estado_inicial[1]
@@ -84,7 +89,7 @@ def busquedaProfundidad(estado_inicial,estado_final,sentido,prof):
               copia2_orilla1.remove(y)
               copia_orilla2.append(x)
               copia_orilla2.append(y)
-              if busquedaProfundidad([copia2_orilla1,copia_orilla2,"Enviamos: ",x,y],estado_final,cambiosentido,copia_profundidad):
+              if busquedaProfundidad([copia2_orilla1,copia_orilla2],estado_final,cambiosentido):
                 return True
         if sentido == True:
           cambiosentido = False
@@ -93,7 +98,7 @@ def busquedaProfundidad(estado_inicial,estado_final,sentido,prof):
             copia_orilla2 = copy.copy(orilla2)
             copia_orilla2.remove(x)
             copia_orilla1.append(x)
-            if busquedaProfundidad([copia_orilla1,copia_orilla2,"Regresamos a ",x],estado_final,cambiosentido,copia_profundidad):
+            if busquedaProfundidad([copia_orilla1,copia_orilla2],estado_final,cambiosentido):
               return True
         if sentido == True:
           cambiosentido = False
@@ -107,7 +112,7 @@ def busquedaProfundidad(estado_inicial,estado_final,sentido,prof):
               copia2_orilla2.remove(y)
               copia_orilla1.append(x)
               copia_orilla1.append(y)
-              if busquedaProfundidad([copia_orilla1,copia2_orilla2,"Regresamos a ",x,y],estado_final,cambiosentido,copia_profundidad):
+              if busquedaProfundidad([copia_orilla1,copia2_orilla2],estado_final,cambiosentido):
                 return True
         List.pop()      
     return False
@@ -119,12 +124,15 @@ Iniciamos el segundo estado de tiempo y restamos el tiempo final menos eltiempo 
 '''
 profundidad_inicio = time.time()
 
-if busquedaProfundidad(estInicio,estFinal,ida,profundidad):
+if busquedaProfundidad(estInicio,estFinal,ida):
   print("Llegaste a Laugh Tale")
-  for a in List:
-    print(a)
+  print("|")
+  print("v")
+  for i in List:
+    print(i)
 else:
   print("Aun esta Barbanegra")  
 
 profundidad_final= time.time()
 print("\nBúsqueda finalizada en",profundidad_final - profundidad_inicio,"segundos\n")
+

@@ -28,15 +28,21 @@ def OnePiece(estado_actual, estado_final):
         return False
 
 Prof = 20 #La maxima cantidad de estados aceptar en nuestra lista que trabaja como pila :p
-
+'''
+La busqueda comenzarea verificando el tamaño de la pila para que cumpla junto con que el tiempo tiene que ser menor al dicho por eso en cada recurtsion mandamos
+la copia del tiempo menos el elemeto de mayor tamaño que seria lo que tardo en pasar el puente. Nota 1
+Al estar trabajando con una lista de lista que trabaja como pila :v(phyton..), cada lsita dentro de la lista es una orilla
+por consecuente tenemos dos asi que  el[0] sera la orilla de partida y la [1] sera la orilla final u objetivo
+'''
 def busquedaProfundidad(estado_actual, estado_final, sentido, tiempo ):
-    if len(List)-1 < Prof and tiempo >0:
-        List.append(estado_actual)
+    if len(List)-1 < Prof and tiempo >0:#Vemos que nuestra lista no supere el maximo de profundidad en caso de que entre en un bucle
+        List.append(estado_actual)  #Comenzamos agregando el estado inicial a la lista para tener nuestro primer nodo
         orilla1 = estado_actual[0]
         orilla2= estado_actual[1]
 
-        if OnePiece(orilla2, estado_final):
-            return True
+        if OnePiece(orilla2, estado_final): #Haber si esta referencia es de tu nivel
+            return True #Si encuentras Rie como Roger
+    else:
         else:
 
             if sentido == False:
@@ -62,6 +68,7 @@ def busquedaProfundidad(estado_actual, estado_final, sentido, tiempo ):
                             copia_orilla2.append(x)
                             copia_orilla2.append(y)
                             copia_tiempo = copy.copy(tiempo)
+                            #Nota 1 Arriba
                             if x-y > 0:
                                 copia_tiempo = copia_tiempo - x
                                 if busquedaProfundidad([copia2_orilla1,copia_orilla2], estado_final, cambiosentido, copia_tiempo):
