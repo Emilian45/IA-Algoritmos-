@@ -12,10 +12,12 @@ List= Sera en donde guardemos nuestros estados
 '''
 estInicio = ["R","R","R","V","S","S","S"]  
 estFinal  = ["S","S","S","V","R","R","R"]
+Prof=20
 List = []
 
 '''
 Definimos la comparacion que se realizara de los elementos dentro de losa rreglos para ver si se ha llegado al estado final requerido
+agregando nuestro toque personal en cuanto a referencias otakus
 '''
 
 def OnePiece(estado_inicial,estado_final):
@@ -36,42 +38,44 @@ def busquedaEspacioVacio(estado_inicial):
 dado el indice del espacio vacio cerificara si el sapo esta en la posicion para moverse
 y se copiara el estado en el que se encuentra y mandarlo dentro de la lista recursiva que verificara si es el estado final
 y si no lo es hara de nuevo la busqueda entr los posibles movimientos, asi en u  ciclo hasta que  encuentre
+Cabe mencionar que nuestra variable estado inicial y las copias respectivas seran mas 
 '''
 def busquedaProfundidad(estado_inicial,estado_final):
-  List.append(estado_inicial) #Comenzamos agregando el estado inicial a la lista para tener nuestro primer nodo
-  if OnePiece(estado_inicial,estado_final):
-      return True #Si encuentras Rie como Roger
-  else:
-      i=busquedaEspacioVacio(estado_inicial) #Si no haras los siguientes pasos para resolver el problema de la vida---------
-      if i+1 <= len(estado_inicial)-1 and estado_inicial[i+1] == "S":
-        copiaestado = copy.copy(estado_inicial)
-        copiaestado[i] = "S"
-        copiaestado[i+1] = "V"
-        if busquedaProfundidad (copiaestado, estado_final): #Aplicamos la recursividad con la copia del estado inicial para elarguemnto quede en el estado actual
-          return True
+  if len(List)<Prof:
+    List.append(estado_inicial) #Comenzamos agregando el estado inicial a la lista para tener nuestro primer nodo
+    if OnePiece(estado_inicial,estado_final):
+        return True #Si encuentras Rie como Roger
+    else:
+        i=busquedaEspacioVacio(estado_inicial) #Si no haras los siguientes pasos para resolver el problema de la vida---------
+        if i+1 <= len(estado_inicial)-1 and estado_inicial[i+1] == "S":
+          copiaestado = copy.copy(estado_inicial)
+          copiaestado[i] = "S"
+          copiaestado[i+1] = "V"
+          if busquedaProfundidad (copiaestado, estado_final): #Aplicamos la recursividad con la copia del estado inicial para elarguemnto quede en el estado actual
+            return True
 
-      if i-2 >= 0 and estado_inicial[i-2] == "R":
-        copiaestado = copy.copy(estado_inicial)
-        copiaestado[i] = "R"
-        copiaestado[i-2] = "V"
-        if busquedaProfundidad(copiaestado,estado_final):
-          return True
-
-      if i+2 <= len(estado_inicial)-1 and estado_inicial[i+2] == "S":
-        copiaestado = copy.copy(estado_inicial)
-        copiaestado[i] = "S"
-        copiaestado[i+2] = "V"
-        if busquedaProfundidad(copiaestado,estado_final):
-           return True
-
-      if i-1 >= 0 and estado_inicial[i-1] == "R":
+        if i-2 >= 0 and estado_inicial[i-2] == "R":
           copiaestado = copy.copy(estado_inicial)
           copiaestado[i] = "R"
-          copiaestado[i-1] = "V"
+          copiaestado[i-2] = "V"
           if busquedaProfundidad(copiaestado,estado_final):
             return True
-      List.pop()
-      return False
+
+        if i+2 <= len(estado_inicial)-1 and estado_inicial[i+2] == "S":
+          copiaestado = copy.copy(estado_inicial)
+          copiaestado[i] = "S"
+          copiaestado[i+2] = "V"
+          if busquedaProfundidad(copiaestado,estado_final):
+            return True
+
+        if i-1 >= 0 and estado_inicial[i-1] == "R":
+            copiaestado = copy.copy(estado_inicial)
+            copiaestado[i] = "R"
+            copiaestado[i-1] = "V"
+            if busquedaProfundidad(copiaestado,estado_final):
+              return True
+        List.pop()
+        return False
 '''
 Iniciamos el tiempo, y despues ejecutamos elalgoritmo de busqueda en donde si sale retornara un True, imprimara el texto y 
 dara inicio al ciclo for que imprimira toda la lista donde se encuentra los pasos que siguio  para llegar al estado final
