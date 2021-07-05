@@ -1,8 +1,6 @@
 import copy
 import time
 
-
-
 '''
 Mapa con un barquero, 1 barco y 1 oveja, 1 caja de coles, 1 lobo y dos orillas
 separadas por un lago
@@ -10,8 +8,8 @@ Donde  el barquero y el barco seran el cambio  entre la lista de listas
 Cada lista dentro de la listra representa una orilla en donde el objetivo es pasar  todos los objetos de una lista a otra lista dentro de la lista 
 siguiendo las reglas que se estreblcerean mas adelantes
 '''
-estInicio = [[  [["Lobo","Obeja","Repollo"],[]]  ]]
-estFinal   = ["Lobo","Obeja","Repollo"]
+estInicio = [[  [["Lobo","Obeja","Coles"],[]]  ]]
+estFinal   = ["Lobo","Obeja","Coles"]
 List = []
 Ida=False
 
@@ -50,19 +48,19 @@ def reglas(estado_inicial,sentido):
       ListReglas.append([copia_orilla1,copia_orilla2])
     #LOBO 
     if validacionExisObjeto(orilla1,"Lobo"):
-      if not validacionExisObjeto(orilla1,"Repollo") and validacionExisObjeto(orilla1,"Obeja") or validacionExisObjeto(orilla1,"Repollo") and not validacionExisObjeto(orilla1,"Obeja"):
+      if not validacionExisObjeto(orilla1,"Coles") and validacionExisObjeto(orilla1,"Obeja") or validacionExisObjeto(orilla1,"Coles") and not validacionExisObjeto(orilla1,"Obeja"):
         copia_orilla1 = copy.copy(orilla1)
         copia_orilla2 = copy.copy(orilla2)
         copia_orilla1.remove("Lobo")
         copia_orilla2.append("Lobo")
         ListReglas.append([copia_orilla1,copia_orilla2])
     #REPOLLO
-    if validacionExisObjeto(orilla1,"Repollo"):
+    if validacionExisObjeto(orilla1,"Coles"):
       if not validacionExisObjeto(orilla1,"Lobo") and validacionExisObjeto(orilla1,"Obeja") or validacionExisObjeto(orilla1,"Lobo") and not validacionExisObjeto(orilla1,"Obeja"):
         copia_orilla1 = copy.copy(orilla1)
         copia_orilla2 = copy.copy(orilla2)
-        copia_orilla1.remove("Repollo")
-        copia_orilla2.append("Repollo")
+        copia_orilla1.remove("Coles")
+        copia_orilla2.append("Coles")
         ListReglas.append([copia_orilla1,copia_orilla2])
     #print(0," Estado Actual: ",ea," posibles mov: ", lista)
     return ListReglas 
@@ -71,7 +69,7 @@ def reglas(estado_inicial,sentido):
     #accion = 0
     #NOSOTROS SOLOS CON LA BARCA
     if not validacionExisObjeto(orilla2,"Lobo") and validacionExisObjeto(orilla2,"Obeja") or not validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Lobo"):
-      if not validacionExisObjeto(orilla2,"Repollo") and validacionExisObjeto(orilla2,"Obeja") or not validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Repollo") or validacionExisObjeto(orilla2,"Lobo") and validacionExisObjeto(orilla2,"Repollo"):
+      if not validacionExisObjeto(orilla2,"Coles") and validacionExisObjeto(orilla2,"Obeja") or not validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Coles") or validacionExisObjeto(orilla2,"Lobo") and validacionExisObjeto(orilla2,"Repollo"):
         ListReglas.append([orilla1,orilla2])
     #NOSOTROS CON LA OBEJA
     if validacionExisObjeto(orilla2,"Obeja"):
@@ -82,24 +80,25 @@ def reglas(estado_inicial,sentido):
       ListReglas.append([copia_orilla1,copia_orilla2])
     #NOSOTROS CON EL LOBO
     if validacionExisObjeto(orilla2,"Lobo"):
-      if not validacionExisObjeto(orilla2,"Repollo") and validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Repollo") and not validacionExisObjeto(orilla2,"Obeja"):
+      if not validacionExisObjeto(orilla2,"Coles") and validacionExisObjeto(orilla2,"Obeja") and validacionExisObjeto(orilla2,"Coles") and not validacionExisObjeto(orilla2,"Obeja"):
         copia_orilla1 = copy.copy(orilla1)
         copia_orilla2 = copy.copy(orilla2)
         copia_orilla2.remove("Lobo")
         copia_orilla1.append("Lobo")
         ListReglas.append([copia_orilla1,copia_orilla2])
     #NOSOTROS CON EL REPOLLO
-    if validacionExisObjeto(orilla2,"Repollo"):
+    if validacionExisObjeto(orilla2,"Coles"):
       if not validacionExisObjeto(orilla2,"Lobo") and validacionExisObjeto(orilla2,"Obeja") or validacionExisObjeto(orilla2,"Lobo") and not validacionExisObjeto(orilla2,"Obeja"):
         copia_orilla1 = copy.copy(orilla1)
         copia_orilla2 = copy.copy(orilla2)
-        copia_orilla2.remove("Repollo")
-        copia_orilla1.append("Repollo")
+        copia_orilla2.remove("Coles")
+        copia_orilla1.append("Coles")
         ListReglas.append([copia_orilla1,copia_orilla2])
     #print(1," Estado Actual: ",ea," posibles mov: ", lista)    
     return ListReglas  
 
 '''
+Esto lo dejo comentado porque fue la base del de profundidad 
 def reglas(estado_inicial,sentido):
   orilla1  = estado_inicial[0]
   orilla2 = estado_inicial[1]
@@ -155,25 +154,25 @@ def reglas(estado_inicial,sentido):
 '''
 
 def busquedaAnchura(estado_inicial,estado_final,sentido):
-  
+  ListAux2 = []  #Una Lista de Listas Auxiliar
   bandera = False
   
   while bandera == False:
     aux = copy.copy(estado_inicial) #Copiamos la lista de estados actuales en un auxiliar
     estado_inicial.clear()          #Limpiamos el estado Actual
-    ListaDeListas = []  #Una Lista de Listas Auxiliar
-    for a in aux: #Recorremos  toda  la  lista  de  listas  medainte  un  for  y  una   varaible   a   que   apunta   a   la   lista   de   listas   actual
-      opciones = reglas(a[len(a)-1],sentido) #Obtenemos una lista de todos los posibles movimientos de la ultima posicion de la lista guarada en a
-      for i in opciones:#Recorremos  esa  lista  de  posibles   movminetos  con   un   for
-        copia_a = copy.copy(a)#Creamos una copia de la lista a para  cada  posible  movimiento
-        if OnePiece(i,estado_final):#validamos si el posible movimiento es el estado final
-          a.append(i)#De ser el estado final agregamos este movimiento final a la copia de la lista a
-          for c in a:#recorremos  esta  lista  con  la  solucion  con  un   for
-            List.append(c)#Agregamos  todos  los   movimientos   en   la   pila
+   
+    for x in aux: #Recorremos  toda  la  lista  de  listas  medainte  un  for  y  una   varaible   a   que   apunta   a   la   lista   de   listas   actual
+      opciones = reglas(x[len(x)-1],sentido) #Obtenemos una lista de todos los posibles movimientos de la ultima posicion de la lista guarada en a
+      for y in opciones:#Recorremos  esa  lista  de  posibles   movminetos  con   un   for
+        copia_x = copy.copy(x)#Creamos una copia de la lista a para  cada  posible  movimiento
+        if OnePiece(y,estado_final):#validamos si el posible movimiento es el estado final
+          x.append(y)#De ser el estado final agregamos este movimiento final a la copia de la lista a
+          for z in x:#recorremos  esta  lista  con  la  solucion  con  un   for
+            List.append(z)#Agregamos  todos  los   movimientos   en   la   pila
           return True#Cuando termine de agregar los movimientos retornamos True
-        copia_a.append(i)#En caso de que no sea el estado final este posible movimiento, agregamos este movimiento en la copia de la lista a
-        ListaDeListas.append(copia_a)#Agregamos esta copia de la lista a en la lista de listas auxiliar
-    estado_inicial = copy.copy(ListaDeListas)#Copiamos todos la lista de listas auxiliar en  el  estado  actual 
+        copia_x.append(y)#En caso de que no sea el estado final este posible movimiento, agregamos este movimiento en la copia de la lista a
+        ListAux2.append(copia_x)#Agregamos esta copia de la lista a en la lista de listas auxiliar
+    estado_inicial = copy.copy(ListAux2)#Copiamos todos la lista de listas auxiliar en  el  estado  actual 
     #Con esto le estamos diciendo que cambie di direcicon en su busqueda
     if sentido == 0:
       sentido = 1
@@ -197,3 +196,5 @@ profundidad_final= time.time()
 print("\nBúsqueda finalizada en",profundidad_final - profundidad_inicio,"segundos\n")
  
 
+
+ 
