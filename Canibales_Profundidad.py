@@ -65,7 +65,7 @@ def validacionExisObjeto(Orilla,Objeto):
 
 Prof = 20 #La maxima cantidad de estados aceptar en nuestra cola
 
-def busquedaProfundidad(estado_inicial,sentido):
+def reglas(estado_inicial,sentido):
     List.append(estado_inicial)
     orilla1= estado_inicial[0]
     orilla2= estado_inicial[1]
@@ -76,77 +76,118 @@ def busquedaProfundidad(estado_inicial,sentido):
     estado actual, despues indicamos que vlide cualquier otro estado que no sea el inicial
     '''
 
-            if sentido==False:
-                if ((BusquedaCanibal(orilla2) >= 2) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >=0) and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >=2)) or ((BusquedaCanibal(orilla2) >= 2) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >=0) and (BusquedaMisionero(orilla1) == 0)): 
-                    copia_orilla1 = copy.copy(orilla1)
-                    copia_orilla2 = copy.copy(orilla2)
-                    copia_orilla2.remove("Canibal")
-                    copia_orilla2.remove("Canibal")
-                    copia_orilla1.append("Canibal")
-                    copia_orilla1.append("Canibal")
-                    ListaAxiliar2.append( [ copia_orilla1 , copia_orilla2])
+    if sentido==False:
+      if ((BusquedaCanibal(orilla2) >= 2) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >=0) and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >=2)) or ((BusquedaCanibal(orilla2) >= 2) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >=0) and (BusquedaMisionero(orilla1) == 0)): 
+        copia_orilla1 = copy.copy(orilla1)
+        copia_orilla2 = copy.copy(orilla2)
+        copia_orilla2.remove("Canibal")
+        copia_orilla2.remove("Canibal")
+        copia_orilla1.append("Canibal")
+        copia_orilla1.append("Canibal")
+        ListaAxiliar2.append( [ copia_orilla1 , copia_orilla2])
                       
-                if (BusquedaMisionero(orilla2) >= 2) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >= 2):
-                    copia_orilla1 = copy.copy(orilla1)
-                    copia_orilla2 = copy.copy(orilla2)
-                    copia_orilla2.remove("Misionero")
-                    copia_orilla2.remove("Misionero")
-                    copia_orilla1.append("Misionero")
-                    copia_orilla1.append("Misionero")
-                    ListaAxiliar2.append( [ copia_orilla1 , copia_orilla2])
+      if (BusquedaMisionero(orilla2) >= 2) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >= 2):
+        copia_orilla1 = copy.copy(orilla1)
+        copia_orilla2 = copy.copy(orilla2)
+        copia_orilla2.remove("Misionero")
+        copia_orilla2.remove("Misionero")
+        copia_orilla1.append("Misionero")
+        copia_orilla1.append("Misionero")
+        ListaAxiliar2.append( [ copia_orilla1 , copia_orilla2])
 
-                if (BusquedaMisionero(orilla2) > 0) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >= 0) and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >= 0): 
-                    copia_orilla1 = copy.copy(orilla1)
-                    copia_orilla2 = copy.copy(orilla2)
-                    copia_orilla2.remove("Misionero")
-                    copia_orilla2.remove("Canibal")
-                    copia_orilla1.append("Misionero")
-                    copia_orilla1.append("Canibal")
-                    ListaAxiliar2.append( [ copia_orilla1 , copia_orilla2])
+      if (BusquedaMisionero(orilla2) > 0) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >= 0) and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >= 0): 
+        copia_orilla1 = copy.copy(orilla1)
+        copia_orilla2 = copy.copy(orilla2)
+        copia_orilla2.remove("Misionero")
+        copia_orilla2.remove("Canibal")
+        copia_orilla1.append("Misionero")
+        copia_orilla1.append("Canibal")
+        ListaAxiliar2.append( [ copia_orilla1 , copia_orilla2])
 
-                if BusquedaCanibal(orilla2)>0:
-                    copia_orilla1 = copy.copy(orilla1)
-                    copia_orilla2 = copy.copy(orilla2)
-                    copia_orilla2.remove("Canibal")
-                    copia_orilla1.append("Canibal")
-                    ListaAxiliar2.append( [ copia_orilla1 , copia_orilla2])
+      if BusquedaCanibal(orilla2)>0:
+        copia_orilla1 = copy.copy(orilla1)
+        copia_orilla2 = copy.copy(orilla2)
+        copia_orilla2.remove("Canibal")
+        copia_orilla1.append("Canibal")
+        ListaAxiliar2.append( [ copia_orilla1 , copia_orilla2])
 
-                if (BusquedaMisionero(orilla2)>0) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >=1)  and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1)>=0):
-                    copia_orilla1 = copy.copy(orilla1)
-                    copia_orilla2 = copy.copy(orilla2)
-                    copia_orilla2.remove("Misionero")
-                    copia_orilla1.append("Misionero")
-                    ListaAxiliar2.append( [ copia_orilla1 , copia_orilla2])
+      if (BusquedaMisionero(orilla2)>0) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >=1)  and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1)>=0):
+        copia_orilla1 = copy.copy(orilla1)
+        copia_orilla2 = copy.copy(orilla2)
+        copia_orilla2.remove("Misionero")
+        copia_orilla1.append("Misionero")
+        ListaAxiliar2.append( [ copia_orilla1 , copia_orilla2])
 
-                return ListaAxiliar2
+      return ListaAxiliar2
 
-            if sentido==True:
+    if sentido==True:
                 #cambiosentido=False        
 
-                if ((BusquedaCanibal(orilla1) >= 2) and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >=0) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >=2)) or ((BusquedaCanibal(orilla1) >= 2) and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >=0) and (BusquedaMisionero(orilla2) == 0)): 
-                    copia_orilla1= copy.copy(orilla1)
-                    copia_orilla2= copy.copy(orilla2)
-                    copia_orilla1.remove("Canibal")
-                    copia_orilla1.remove("Canibal")
-                    copia_orilla2.append("Canibal")
-                    copia_orilla2.append("Canibal")
-                    ListaAxiliar2.append( [ copia_orilla1 , copia_orilla2]) 
+      if ((BusquedaCanibal(orilla1) >= 2) and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >=0) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >=2)) or ((BusquedaCanibal(orilla1) >= 2) and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >=0) and (BusquedaMisionero(orilla2) == 0)): 
+        copia_orilla1= copy.copy(orilla1)
+        copia_orilla2= copy.copy(orilla2)
+        copia_orilla1.remove("Canibal")
+        copia_orilla1.remove("Canibal")
+        copia_orilla2.append("Canibal")
+        copia_orilla2.append("Canibal")
+        ListaAxiliar2.append( [ copia_orilla1 , copia_orilla2]) 
 
-                if (BusquedaMisionero(orilla1) > 0) and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >= 0) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >= 0): 
-                    copia_orilla1= copy.copy(orilla1)
-                    copia_orilla2= copy.copy(orilla2)
-                    copia_orilla1.remove("Misionero")
-                    copia_orilla1.remove("Canibal")
-                    copia_orilla2.append("Misionero")
-                    copia_orilla2.append("Canibal")
-                    ListaAxiliar2.append( [ copia_orilla1 , copia_orilla2])
+      if (BusquedaMisionero(orilla1) > 0) and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >= 0) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >= 0): 
+        copia_orilla1= copy.copy(orilla1)
+        copia_orilla2= copy.copy(orilla2)
+        copia_orilla1.remove("Misionero")
+        copia_orilla1.remove("Canibal")
+        copia_orilla2.append("Misionero")
+        copia_orilla2.append("Canibal")
+        ListaAxiliar2.append( [ copia_orilla1 , copia_orilla2])
 
-                if (BusquedaMisionero(orilla1) >= 2) and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >= 2):
-                    copia_orilla1 = copy.copy(orilla1)
-                    copia_orilla2 = copy.copy(orilla2)
-                    copia_orilla1.remove("Misionero")
-                    copia_orilla1.remove("Misionero")
-                    copia_orilla2.append("Misionero")
-                    copia_orilla2.append("Misionero")
-                    ListaAxiliar2.append( [ copia_orilla1 , copia_orilla2])
-                return ListaAxiliar2
+      if (BusquedaMisionero(orilla1) >= 2) and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >= 2):
+        copia_orilla1 = copy.copy(orilla1)
+        copia_orilla2 = copy.copy(orilla2)
+        copia_orilla1.remove("Misionero")
+        copia_orilla1.remove("Misionero")
+        copia_orilla2.append("Misionero")
+        copia_orilla2.append("Misionero")
+        ListaAxiliar2.append( [ copia_orilla1 , copia_orilla2])
+      return ListaAxiliar2
+
+def busquedaAnchura(estado_inicial,estado_final,sentido):
+  
+  bandera = False
+  
+  while bandera == False:
+    aux = copy.copy(estado_inicial) #Copiamos la lista de estados actuales en un auxiliar
+    estado_inicial.clear()          #Limpiamos el estado Actual
+    ListAux3 = []  #Una Lista de Listas Auxiliar
+    for x in aux: #Recorremos  toda  la  lista  de  listas  medainte  un  for  y  una   varaible   a   que   apunta   a   la   lista   de   listas   actual
+      opciones = reglas(x[len(x)-1],sentido) #Obtenemos una lista de todos los posibles movimientos de la ultima posicion de la lista guarada en a
+      for y in opciones:#Recorremos  esa  lista  de  posibles   movminetos  con   un   for
+        copia_x = copy.copy(x)#Creamos una copia de la lista a para  cada  posible  movimiento
+        if OnePiece(y,estado_final):#validamos si el posible movimiento es el estado final
+          x.append(y)#De ser el estado final agregamos este movimiento final a la copia de la lista a
+          for z in x:#recorremos  esta  lista  con  la  solucion  con  un   for
+            List.append(z)#Agregamos  todos  los   movimientos   en   la   pila
+          return True#Cuando termine de agregar los movimientos retornamos True
+        copia_x.append(y)#En caso de que no sea el estado final este posible movimiento, agregamos este movimiento en la copia de la lista a
+        ListAux3.append(copia_x)#Agregamos esta copia de la lista a en la lista de listas auxiliar
+    estado_inicial = copy.copy(ListAux3)#Copiamos todos la lista de listas auxiliar en  el  estado  actual 
+    #Con esto le estamos diciendo que cambie di direcicon en su busqueda
+    if sentido == 0:
+      sentido = 1
+    elif sentido == 1:
+      sentido = 0
+
+'''
+Iniciamos el tiempo, y despues ejecutamos elalgoritmo de busqueda en donde si sale retornara un True, imprimara el texto y 
+dara inicio al ciclo for que imprimira toda la lista donde se encuentra los pasos que siguio  para llegar al estado final
+Iniciamos el segundo estado de tiempo y restamos el tiempo final menos eltiempo inicial para poder ver el tiempo final 
+'''
+profundidad_inicio = time.time()
+
+if busquedaAnchura(estInicio,estFinal,Ida):
+  print("Llegaste a Laugh Tale")
+  for i in List:
+    print(i)
+
+profundidad_final= time.time()
+print("\nBúsqueda finalizada en",profundidad_final - profundidad_inicio,"segundos\n")
