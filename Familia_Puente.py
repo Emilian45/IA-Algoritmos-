@@ -1,171 +1,126 @@
 import copy
 import time
 '''
-Mapa con que tiene 1 barca y 3 caníbales y 3 misioneros y dos orillas en donde las orillas seran nuestro elemento de la lista de listas
-y los elementos canibales y misioneros estrana dentro de ella, la barca se considera las condciones necesarias para que los movimientos
-de los canibales de efectue
-List= Sera en donde guardemos nuestros estados 
-dir= Al tener problemas con la priorizcion  de la direccion en que se tienen que mover se implemento un cambio de variable
-cada que se mueve de una orilla asi alternando las condicionales if y que tenga un libre funcionamiento dentro de la recursividad
-
+Un mapa donde dos orillas se unen por un puente y se encuentran 6 personas
+con una lámpara
+Donde  el puente  seran el cambio  entre la lista de listas que trabajan con pilas
+Cada lista dentro de la listra representa una orilla en donde el objetivo es pasar  todos los objetos de una lista a otra lista dentro de la lista 
+siguiendo las reglas que se estreblcerean mas adelantes
+la lampara sera un condicional dentro de nuestra busqueda ya que no tiene que exeder los 30 segundos
 '''
-
-estInicio= [["Canibal","Canibal","Canibal","Misionero","Misionero","Misionero"],[]]
-estFinal=6
-ListaAxiliar=[]
+estInicio= [[1,3,6,8,12,],[]]
+estFinal=5
 List=[]
+lampara=30
+Ida= False
+
+#Es hora de rehacer esto, tengo todo en el txt y veamos como no meterle mis encrucijadas mentales
 
 '''
-Si la orilla destino, el elemento 2 de nuestra lista de listas tiene los 6 objetos que diga  con un true que  se ha completado todos los
-objetivos, solo con una pequeña modificacion agregando nuestro toque personal en cuanto a referencias otakus[Nota no servira esto para anchura]
+La funcion que ayudara a saber si encontramos el estado objetivo, se define afuera de todo ya que al usar la 
+recursividad nos ayudara a tener la nocion de cuando acabarla, agregando nuestro toque personal en cuanto a referencias otakus[Nota no servira esto para anchura]
 '''
-def OnePiece(estado_inicial):
-    if len(estado_inicial[1])==estFinal:
+
+def OnePiece(estado_actual, estado_final):
+    if len(estado_actual)==estado_final:
         return True
     else:
         return False
 
-'''Pues como se tornaron unos problemas con el metodo que se venia manejando y ahora se esta resolviendo de manera en que
-  que para verificar estemos contando el numero de misiones  y canibales en cada orilla pues sera mejor contar la cantidad de cada elemento dentro de cada orilla
-  Aqui retornaremos el numero de canibales para poder hacer las comparaciones despues
+Prof = 20 #La maxima cantidad de estados aceptar en nuestra lista que trabaja como pila :p
 '''
-def BusquedaCanibal(Orilla):
-  Canibal  = 0
-  for i in Orilla:
-    if i == "Canibal":
-      Canibal += 1 
-  return Canibal
-
-'''Pues como se tornaron unos problemas con el metodo que se venia manejando y ahora se esta resolviendo de manera en que
-  que para verificar estemos contando el numero de misiones  y canibales en cada orilla pues sera mejor contar la cantidad de cada elemento dentro de cada orilla
-  Aqui retornaremos el numero de Misioneros para poder hacer las comparaciones despues
+La busqueda comenzarea verificando el tamaño de la pila para que cumpla junto con que el tiempo tiene que ser menor al dicho por eso en cada recurtsion mandamos
+la copia del tiempo menos el elemeto de mayor tamaño que seria lo que tardo en pasar el puente. Nota 1
+Al estar trabajando con una lista de lista que trabaja como pila :v(phyton..), cada lsita dentro de la lista es una orilla
+por consecuente tenemos dos asi que  el[0] sera la orilla de partida y la [1] sera la orilla final u objetivo
 '''
-def BusquedaMisionero(Orilla):
-  Misionero = 0
-  for i in Orilla:
-    if i == "Misionero":
-      Misionero += 1
-  return Misionero  
+def busquedaProfundidad(estado_actual, estado_final, sentido, tiempo ):
+    if len(List)-1 < Prof and tiempo >0:#Vemos que nuestra lista no supere el maximo de profundidad en caso de que entre en un bucle
+        List.append(estado_actual)  #Comenzamos agregando el estado inicial a la lista para tener nuestro primer nodo
+        orilla1 = estado_actual[0]
+        orilla2= estado_actual[1]
 
-
-'''Que retorne  un True si en la orilla que digamos exista el objeto que igual digamos para estar viendo asi hacer las reglas
-'''
-def validacionExisObjeto(Orilla,Objeto):
-  for i in Orilla:
-    if i == Objeto:
-      Objeto +=1
-  return Objeto
-
-Prof = 20 #La maxima cantidad de estados aceptar en nuestra cola
-
-def busquedaProfundidad(estado_inicial):
-    List.append(estado_inicial)
-    orilla1= estado_inicial[0]
-    orilla2= estado_inicial[1]
-    '''
-    Primero guardamos los arreglos orilla1 y orilla2 de nuestro estado actual en  variables,
-    Añadimos una variable que va a contener el numero total de elementos que tiene nuestro
-    estado actual, despues indicamos que vlide cualquier otro estado que no sea el inicial
-    '''
-
-    if OnePiece(estado_inicial):#Haber si esta referencia es de tu nivel
-        return True #Si encuentras Rie como Roger
+        if OnePiece(orilla2, estado_final): #Haber si esta referencia es de tu nivel
+            return True #Si encuentras Rie como Roger
     else:
-        if len(List) < Prof and len(orilla1)>0:#Vemos que nuestra lista no supere el maximo de profundidad en caso de que entre en un bucle
-            #Ya que se aplicara de nuevo el modo de vuelta ida tendremos que ver de ambos lados
+        else:
 
-            if ((BusquedaCanibal(orilla2) >= 2) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >=0) and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >=2)) or ((BusquedaCanibal(orilla2) >= 2) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >=0) and (BusquedaMisionero(orilla1) == 0)): 
-                copia_orilla1 = copy.copy(orilla1)
-                copia_orilla2 = copy.copy(orilla2)
-                copia_orilla2.remove("Canibal")
-                copia_orilla2.remove("Canibal")
-                copia_orilla1.append("Canibal")
-                copia_orilla1.append("Canibal")
-                if busquedaProfundidad( [ copia_orilla1 , copia_orilla2] ):#MagiaRecursiva retornando un nuevo estado para verificar
-                  return True
-            if (BusquedaMisionero(orilla2) >= 2) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >= 2):
-              copia_orilla1 = copy.copy(orilla1)
-              copia_orilla2 = copy.copy(orilla2)
-              copia_orilla2.remove("Misionero")
-              copia_orilla2.remove("Misionero")
-              copia_orilla1.append("Misionero")
-              copia_orilla1.append("Misionero")
-              if busquedaProfundidad( [ copia_orilla1 , copia_orilla2] ):#MagiaRecursiva retornando un nuevo estado para verificar
-                return True
-            if (BusquedaMisionero(orilla2) > 0) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >= 0) and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >= 0): 
-              copia_orilla1 = copy.copy(orilla1)
-              copia_orilla2 = copy.copy(orilla2)
-              copia_orilla2.remove("Misionero")
-              copia_orilla2.remove("Canibal")
-              copia_orilla1.append("Misionero")
-              copia_orilla1.append("Canibal")
-              if busquedaProfundidad( [ copia_orilla1 , copia_orilla2] ):#MagiaRecursiva retornando un nuevo estado para verificar
-                return True
-            if BusquedaCanibal(orilla2)>0:
-                copia_orilla1 = copy.copy(orilla1)
-                copia_orilla2 = copy.copy(orilla2)
-                copia_orilla2.remove("Canibal")
-                copia_orilla1.append("Canibal")
-                if busquedaProfundidad( [ copia_orilla1 , copia_orilla2] ):#MagiaRecursiva retornando un nuevo estado para verificar
-                  return True
-            if (BusquedaMisionero(orilla2)>0) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >=1)  and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1)>=0):
-                copia_orilla1 = copy.copy(orilla1)
-                copia_orilla2 = copy.copy(orilla2)
-                copia_orilla2.remove("Misionero")
-                copia_orilla1.append("Misionero")
-                if busquedaProfundidad( [ copia_orilla1 , copia_orilla2] ):#MagiaRecursiva retornando un nuevo estado para verificar
-                  return True
+            if sentido == False:
+                cambiosentido= True
+                ''' Iteramos que el elemento x este dentro de nuestra orilla1 pero se ira acompañado del eleemnto y que contemple abajo,¿Cuales? eso lo vera el programa
+                Para poder trabajar los nodos primero hacemos una copia de la orilla1 en donde estan nuestro elementos, a esa copia le quitaremos el elemento x y mientras tenga elementos
+                nuestra orilla 1 significa que tenemos elementos que tienen que ir al otro lado aun  entonces al hacer esa verificacion izi, hacemos el movminento de
+                quitar los lementos de las copias y agregarlos a la orilla2 asi generenando un nuevo estado que mandaremos a la recursividad con el estado final
+                , el cambio de sentido para que nuestras condicionales trabajen correctamente y el tiempo que verificara en la primera condicional de la busqueda
+                
+                '''
+                for x in orilla1:
+                    copia_orilla1= copy.copy(orilla1)
+                    copia_orilla1.remove(x)
 
-            if ((BusquedaCanibal(orilla1) >= 2) and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >=0) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >=2)) or ((BusquedaCanibal(orilla1) >= 2) and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >=0) and (BusquedaMisionero(orilla2) == 0)): 
-                copia_orilla1= copy.copy(orilla1)
-                copia_orilla2= copy.copy(orilla2)
-                copia_orilla1.remove("Canibal")
-                copia_orilla1.remove("Canibal")
-                copia_orilla2.append("Canibal")
-                copia_orilla2.append("Canibal")
-                if busquedaProfundidad( [ copia_orilla1 , copia_orilla2] ):#MagiaRecursiva retornando un nuevo estado para verificar
-                    return True 
+                    if len(copia_orilla1) > 0:
+                        for y in copia_orilla1:
 
-            if (BusquedaMisionero(orilla1) > 0) and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >= 0) and (BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >= 0): 
-              copia_orilla1= copy.copy(orilla1)
-              copia_orilla2= copy.copy(orilla2)
-              copia_orilla1.remove("Misionero")
-              copia_orilla1.remove("Canibal")
-              copia_orilla2.append("Misionero")
-              copia_orilla2.append("Canibal")
-              if busquedaProfundidad( [ copia_orilla1 , copia_orilla2] ):#MagiaRecursiva retornando un nuevo estado para verificar
-                return True
-
-            if (BusquedaMisionero(orilla1) >= 2) and (BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >= 2):
-                copia_orilla1 = copy.copy(orilla1)
-                copia_orilla2 = copy.copy(orilla2)
-                copia_orilla1.remove("Misionero")
-                copia_orilla1.remove("Misionero")
-                copia_orilla2.append("Misionero")
-                copia_orilla2.append("Misionero")
-                if busquedaProfundidad( [ copia_orilla1 , copia_orilla2] ): #MagiaRecursiva retornando un nuevo estado para verificar
-                  return True
-
-    List.pop()
+                            copia2_orilla1= copy.copy(orilla1)
+                            copia_orilla2= copy.copy(orilla2)
+                            copia2_orilla1.remove(x)
+                            copia2_orilla1.remove(y)
+                            copia_orilla2.append(x)
+                            copia_orilla2.append(y)
+                            copia_tiempo = copy.copy(tiempo)
+                            #Nota 1 Arriba
+                            if x-y > 0:
+                                copia_tiempo = copia_tiempo - x
+                                if busquedaProfundidad([copia2_orilla1,copia_orilla2], estado_final, cambiosentido, copia_tiempo):
+                                  return True
+                            else:
+                                copia_tiempo = copia_tiempo - y
+                                if busquedaProfundidad([copia2_orilla1,copia_orilla2], estado_final, cambiosentido, copia_tiempo):
+                                  return True
+#Si va de regreso hacemos lo mismo que arriba pero ahora se copia en la orilla1  el elemento
+            if sentido == True:
+                cambiosentido= False
+                for x in orilla2:
+                    copia_orilla1=copy.copy(orilla1)
+                    copia_orilla2=copy.copy(orilla2)
+                    copia_orilla2.remove(x)
+                    copia_orilla1.append(x)
+                    copia_tiempo = copy.copy(tiempo)
+                    copia_tiempo= copia_tiempo - x
+                    if busquedaProfundidad ([copia_orilla1,copia_orilla2], estado_final, cambiosentido, copia_tiempo):
+                        return True
+                    
+            List.pop()
+            return False
     return False
+
 
 '''
 Iniciamos el tiempo, y despues ejecutamos elalgoritmo de busqueda en donde si sale retornara un True, imprimara el texto y 
-dara inicio al ciclo for que imprimira toda la lista donde se encuentra los pasos que siguio  para llegar al estado final
+dara inicio al ciclo for que imprimira toda la lista donde se encuentra los pasos que siguio (todo el contenido de nuestra
+ pila  recorriendolo con un for) para llegar al estado final
 Iniciamos el segundo estado de tiempo y restamos el tiempo final menos eltiempo inicial para poder ver el tiempo final 
 '''
-profundidad_inicio = time.time()
-
-if busquedaProfundidad(estInicio):
+profundidad_inicio = time.time()    
+if busquedaProfundidad(estInicio, estFinal,Ida, lampara):
   print("Llegaste a Laugh Tale")
   print("|")
   print("v")
   for i in List:
     print(i)
-else:
-  print("Aun esta Barbanegra")  
-
 profundidad_final= time.time()
 print("\nBúsqueda finalizada en",profundidad_final - profundidad_inicio,"segundos\n")
+ 
 
 
+
+
+
+
+
+
+
+
+
+    
+    
