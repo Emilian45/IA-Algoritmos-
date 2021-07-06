@@ -14,6 +14,7 @@ List= Sera en donde guardemos nuestros estados
 estInicio = [[["Rana","Rana","Rana","Vacio","Sapo","Sapo","Sapo"]]]
 estFinal   = ["Sapo","Sapo","Sapo","Vacio","Rana","Rana","Rana"]
 List = []
+ListAux2 = []  
 variableparaWhile=False
 
 '''
@@ -74,38 +75,77 @@ def reglas(estado_inicial):
   
   return listaAux  
 
-def busquedaProfundidad(estado_inicial,estado_final):
-  while variableparaWhile == False:
-    copia_estadoActual = copy.copy(estado_inicial) #Copiamos la lista de estados actuales en un auxiliar
-    estado_inicial.clear()          #Limpiamos el estado Actual
-    ListaDeListas = []  #Una Lista de Listas Auxiliar
-
-    for a in copia_estadoActual: #Recorremos  toda  la  lista  de  listas  medainte  un  for  y  una  varaible  a  que  apunta  a  la  lista   de   listas   actual
-      opciones = reglas(a[len(a)-1]) #Obtenemos una lista de todos los posibles movimientos de la ultima posicion de la lista guarada en a
-      for i in opciones:#Recorremos  esa  lista  de  posibles   movminetos  con   un   for
-        cca = copy.copy(a)#Creamos una copia de la lista a para  cada  posible  movimiento
-        if OnePiece(i,estado_final):#validamos si el posible movimiento es el estado final
-          a.append(i)#De ser el estado final agregamos este movimiento final a la copia de la lista a
-          for c in a:#recorremos  esta  lista  con  la  solucion  con  un   for
-            List.append(c)#Agregamos  todos  los   movimientos   en   la   pila
-          return True#Cuando termine de agregar los movimientos retornamos True
-        cca.append(i)#En caso de que no sea el estado final este posible movimiento, agregamos este movimiento en la copia de la lista a
-        ListaDeListas.append(cca)#Agregamos esta copia de la lista a en la lista de listas auxiliar
-    estado_inicial = copy.copy(ListaDeListas)#Copiamos todos la lista de listas auxiliar en  el  estado  actual 
-
+def busquedaAnchura(estado_inicial,estado_final):
+  '''
+  mientras nuestro no se encuentre la solucion no se llamara al return True que viene de las reglas, el cual hara que se rompa el loop infinito
+  cipiamos el estadoinicial(actual donde nos encontremos) para poder recorrerlo con nuestro primer for y el apuntador1 ira rewcorriendo ese estadoactual
+  dentro  de el el apuntaodr sera tratado como una orilla(la que nos piden las reglas) con los posibles movmientos del estado_actual en donde nos encontremos
+   e igual se le pasa el otro parametro snetido que cambiara hasta abajo  y lo guardamos dentro de la variable opciones para poder iterarlo abajo
+  Con el apuntador dos iteramos la variable opciones que contiene una lista de lista(que manjeamos como pila)  y al tener la lista preguntamos si es el nuestro
+  estado final que buscamos en donde nos encontramos sin revisar aun los posibles movimientos, si es el caso agremaos a la lista(List) y retornamos el True que hara
+  que nuestro while salga del  ciclo, si es el caso de que no sea nuestro estado final  agregamos el estadp a la copia del apuntador para generar un estado nuevo y ese
+  estado lo agremos a la lista auxuliar 2
+  si es el caso que volvemos a entrar en el while limpiamos el estado inicial de ese momento para no guardar nada y despues  la lista auxuliar dos  la volvemos nuestro
+  estado inicial para que sin ahber guardado nada siga de ese punto  su recorrdido
+  '''
+  while not False:
+    
+    copia_estadoinicial = copy.copy(estado_inicial)      
+    for apuntador1 in copia_estadoinicial: 
+      opciones = reglas(apuntador1[len(apuntador1)-1]) 
+      for apuntador2 in opciones:
+        #print(apuntador2)
+        copia_apuntador1 = copy.copy(apuntador1)
+        if OnePiece(apuntador2,estado_final):
+          apuntador1.append(apuntador2)
+          for apuntador3 in apuntador1:
+            #print(apuntador3)
+            List.append(apuntador3)
+          return True
+        copia_apuntador1.append(apuntador2)
+        ListAux2.append(copia_apuntador1)
+    #sentido= True if sentido == False else False
+    estado_inicial.clear()   
+    estado_inicial = copy.copy(ListAux2)
+    
+'''
+def busquedaA(estado_inicial,estado_final):
+  cola_prueba=[[[[estado_inicial]]]
+  while not OnePiece(estado_inicial,estado_final):
+    pila= cola_prueba.pop(0)
+    tope= pila[-1]
+    variable1 = reglas(tope[0],tope[1])
+    for x in variable1:
+      pila_copia = copy.copy(pila)
+      pila_copia.append(x)
+      cola_prueba.append(pila_copia)
+    pila=cola_prueba[0]
+    tope= pila[-1]
+    estado_inicial= tope[0]
+    estado_final=tope[1]
+  return cola_prueba.pop(0)
+'''
 '''
 Iniciamos el tiempo, y despues ejecutamos elalgoritmo de busqueda en donde si sale retornara un True, imprimara el texto y 
 dara inicio al ciclo for que imprimira toda la lista donde se encuentra los pasos que siguio  para llegar al estado final
 Iniciamos el segundo estado de tiempo y restamos el tiempo final menos eltiempo inicial para poder ver el tiempo final 
 '''
+'''
+resultado = busquedaProfundidad(estInicio, estFinal)
+for i in resultado
+  print(i)
+'''
 profundidad_inicio = time.time()
 
-if busquedaProfundidad(estInicio,estFinal):
+if busquedaAnchura(estInicio,estFinal):
   print("Llegaste a Laugh Tale")
+  print("|")
+  print("v")
   for i in List:
     print(i)
+else:
+  print("Aun esta Barbanegra")  
 
 profundidad_final= time.time()
 print("\nBúsqueda finalizada en",profundidad_final - profundidad_inicio,"segundos\n")
 
-  

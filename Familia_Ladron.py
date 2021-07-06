@@ -3,8 +3,8 @@ import time
 
 
 
-estInicio = [["Policia","Ladron","Padre","Hijo","Hijo","Madre","Hija","Hija"],[]]
-estFinal   = [[],["Policia","Ladron","Padre","Hijo","Hijo","Madre","Hija","Hija"]]
+estInicio = [["Policia","Cholo","Padre","Hijo","Hijo","Madre","Hija","Hija"],[]]
+estFinal   = [[],["Policia","Cholo","Padre","Hijo","Hijo","Madre","Hija","Hija"]]
 profundidad = 20
 ida = False
 List = []
@@ -41,16 +41,16 @@ def reglas(estado_inicial,sentido):
     de no serlo retornará un False 
     '''
     if sentido == 1:
-      if orilla2[len(orilla2) - 1] == "Hijo" or orilla2[len(orilla2) - 1] == "Hija" or orilla2[len(orilla2) - 1] == "Ladron":
+      if orilla2[len(orilla2) - 1] == "Hijo" or orilla2[len(orilla2) - 1] == "Hija" or orilla2[len(orilla2) - 1] == "Cholo":
         return False
 
     if sentido == 0:
-      if orilla1[len(orilla1) - 1] == "Hijo" or orilla1[len(orilla1) - 1] == "Hija" or orilla1[len(orilla1) - 1] == "Ladron":
+      if orilla1[len(orilla1) - 1] == "Hijo" or orilla1[len(orilla1) - 1] == "Hija" or orilla1[len(orilla1) - 1] == "Cholo":
         return False
     '''
-    Validamos que ningun miembro se quede solo con el ladron sin la presencia del policia 
+    Validamos que ningun miembro se quede solo con el Cholo sin la presencia del policia 
     '''
-    if len(orilla1) >= 2 and validacionExisObjeto(orilla1,"Ladron") and not validacionExisObjeto(orilla1,"Policia") or len(orilla2) >= 2 and validacionExisObjeto(orilla2,"Ladron") and not validacionExisObjeto(orilla2,"Policia"):
+    if len(orilla1) >= 2 and validacionExisObjeto(orilla1,"Cholo") and not validacionExisObjeto(orilla1,"Policia") or len(orilla2) >= 2 and validacionExisObjeto(orilla2,"Cholo") and not validacionExisObjeto(orilla2,"Policia"):
       return False
     '''
     Validamos que ningun hijo se quede solo con la Madre sin la presencia del Padre 
@@ -68,14 +68,15 @@ def reglas(estado_inicial,sentido):
 Prof=20  #La maxima cantidad de estados aceptar en nuestra lista que trabaja como pila :p
 
 def busquedaProfundidad(estado_inicial,estado_final,sentido):
-  if len(List)-1 < Prof:
-    if reglas(estado_inicial,sentido):
+  if len(List)-1 < Prof: #Mientras nuestra pila no supere la profundidad maaxima hara todo el proceso pero si lo supero que se haga un pop de esos estados
+    if reglas(estado_inicial,sentido): 
       List.append(estado_inicial)
       orilla1  = estado_inicial[0]
       orilla2 = estado_inicial[1]
       ef      = estado_final[1]
-      if OnePiece(orilla2,ef):
-        return True
+      if OnePiece(orilla2,ef): #Haber si esta referncia es de tu talla
+        return True #Si encuentras Rie como Roger
+    
       else:
         if sentido == False:
           cambiosentido = True
@@ -89,7 +90,7 @@ def busquedaProfundidad(estado_inicial,estado_final,sentido):
               copia2_orilla1.remove(y)
               copia_orilla2.append(x)
               copia_orilla2.append(y)
-              if busquedaProfundidad([copia2_orilla1,copia_orilla2],estado_final,cambiosentido):
+              if busquedaProfundidad([copia2_orilla1,copia_orilla2],estado_final,cambiosentido):# Hacemos que revise ese nuevo estado recursivamente
                 return True
         if sentido == True:
           cambiosentido = False
@@ -98,7 +99,7 @@ def busquedaProfundidad(estado_inicial,estado_final,sentido):
             copia_orilla2 = copy.copy(orilla2)
             copia_orilla2.remove(x)
             copia_orilla1.append(x)
-            if busquedaProfundidad([copia_orilla1,copia_orilla2],estado_final,cambiosentido):
+            if busquedaProfundidad([copia_orilla1,copia_orilla2],estado_final,cambiosentido):# Hacemos que revise ese nuevo estado recursivamente
               return True
         if sentido == True:
           cambiosentido = False
@@ -112,7 +113,7 @@ def busquedaProfundidad(estado_inicial,estado_final,sentido):
               copia2_orilla2.remove(y)
               copia_orilla1.append(x)
               copia_orilla1.append(y)
-              if busquedaProfundidad([copia_orilla1,copia2_orilla2],estado_final,cambiosentido):
+              if busquedaProfundidad([copia_orilla1,copia2_orilla2],estado_final,cambiosentido):# Hacemos que revise ese nuevo estado recursivamente
                 return True
         List.pop()      
     return False
@@ -135,4 +136,3 @@ else:
 
 profundidad_final= time.time()
 print("\nBúsqueda finalizada en",profundidad_final - profundidad_inicio,"segundos\n")
-
