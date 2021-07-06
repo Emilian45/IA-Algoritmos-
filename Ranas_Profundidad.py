@@ -12,7 +12,6 @@ List= Sera en donde guardemos nuestros estados
 '''
 estInicio = ["Rana","Rana","Rana","Vacio","Sapo","Sapo","Sapo"]  
 estFinal  = ["Sapo","Sapo","Sapo","Vacio","Rana","Rana","Rana"]
-Prof=20
 List = []
 
 '''
@@ -40,6 +39,7 @@ y se copiara el estado en el que se encuentra y mandarlo dentro de la lista recu
 y si no lo es hara de nuevo la busqueda entr los posibles movimientos, asi en u  ciclo hasta que  encuentre
 Cabe mencionar que nuestra variable estado inicial y las copias respectivas seran mas estados donde nos encontremos actualmente que estados iniciales
 '''
+Prof=20#Profunidad maxima que podra alcanzar
 def busquedaProfundidad(estado_inicial,estado_final):
   if len(List)<Prof: #Vemos que nuestra lista no supere el maximo de profundidad en caso de que entre en un bucle
     List.append(estado_inicial) #Comenzamos agregando el estado inicial a la lista para tener nuestro primer nodo
