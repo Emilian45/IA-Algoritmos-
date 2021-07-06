@@ -46,32 +46,32 @@ def busquedaProfundidad(estado_inicial,estado_final):
     if OnePiece(estado_inicial,estado_final):
         return True #Si encuentras Rie como Roger
     else:
-        x=busquedaEspacioVacio(estado_inicial) #Si no aplicaras las reglas y encuentra la isla final
-        if x+1 <= len(estado_inicial)-1 and estado_inicial[x+1] == "Sapo":
+        espacio_actual=busquedaEspacioVacio(estado_inicial) #Si no aplicaras las reglas y encuentra la isla final
+        if espacio_actual+1 <= len(estado_inicial)-1 and estado_inicial[espacio_actual+1] == "Sapo":
           copia_estado = copy.copy(estado_inicial) #Una vez verificada la condicion, hacemos una copia del estado inicial y en la posicion que nos retorna el vacio verificamos
-          copia_estado[x] = "Sapo"
-          copia_estado[x+1] = "Vacio"
+          copia_estado[espacio_actual] = "Sapo"
+          copia_estado[espacio_actual+1] = "Vacio"
           if busquedaProfundidad (copia_estado, estado_final): #Aplicamos la recursividad con la copia del estado inicial para elarguemnto quede en el estado actual
             return True
 
-        if x-2 >= 0 and estado_inicial[x-2] == "Rana":
+        if espacio_actual-2 >= 0 and estado_inicial[espacio_actual-2] == "Rana":
           copia_estado = copy.copy(estado_inicial)
-          copia_estado[x] = "Rana"
-          copia_estado[x-2] = "Vacio"
+          copia_estado[espacio_actual] = "Rana"
+          copia_estado[espacio_actual-2] = "Vacio"
           if busquedaProfundidad(copia_estado,estado_final): #La magia de la recursividad
             return True
 
-        if x+2 <= len(estado_inicial)-1 and estado_inicial[x+2] == "Sapo":
+        if espacio_actual+2 <= len(estado_inicial)-1 and estado_inicial[espacio_actual+2] == "Sapo":
           copia_estado = copy.copy(estado_inicial)
-          copia_estado[x] = "Sapo"
-          copia_estado[x+2] = "Vacio"
+          copia_estado[espacio_actual] = "Sapo"
+          copia_estado[espacio_actual+2] = "Vacio"
           if busquedaProfundidad(copia_estado,estado_final): #La magia de la recursividad
             return True
 
-        if x-1 >= 0 and estado_inicial[x-1] == "Rana":
+        if espacio_actual-1 >= 0 and estado_inicial[espacio_actual-1] == "Rana":
             copia_estado = copy.copy(estado_inicial)
-            copia_estado[x] = "Rana"
-            copia_estado[x-1] = "Vacio"
+            copia_estado[espacio_actual] = "Rana"
+            copia_estado[espacio_actual-1] = "Vacio"
             if busquedaProfundidad(copia_estado,estado_final): #La magia de la recursividad
               return True
         List.pop() #Si no es el caso mejor sacalo de la lista que trabaja como pila 
@@ -92,5 +92,3 @@ if busquedaProfundidad(estInicio,estFinal):
 
 profundidad_final= time.time()
 print("\nBúsqueda finalizada en",profundidad_final - profundidad_inicio,"segundos\n")
-
- 

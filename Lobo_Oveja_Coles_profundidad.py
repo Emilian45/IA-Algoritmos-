@@ -76,7 +76,8 @@ def busquedaProfundidad(estado_inicial):
           #Ya que se aplicara de nuevo el modo de vuelta ida tendremos que ver de ambos lados
                 '''
                 Aqui vemos que lo que se hace es dadas las vericaciones en cada if que vamos comparando con el numero de canibales o misioneros
-                en las orillas establecemos los momientos que se hara, como podria ser el caso de ida y retorno que debemos especificar
+                en las orillas establecemos los momientos que se hara, como podria ser el caso de ida y retorno que debemos especificar lo que se hara con
+                cada copia de las orillas lo cual me permitira agregar y quitar elementos de las orillas y mandar ese estado nuevo de vuelta a la recursion
                 '''
           #if sentido==False:
                 #cambiosentido=True

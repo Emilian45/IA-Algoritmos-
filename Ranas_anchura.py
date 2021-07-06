@@ -11,8 +11,8 @@ S= Sapos
 List= Sera en donde guardemos nuestros estados 
 '''
 
-estInicio = [[["R","R","R","V","S","S","S"]]]
-estFinal   = ["S","S","S","V","R","R","R"]
+estInicio = [[["Rana","Rana","Rana","Vacio","Sapo","Sapo","Sapo"]]]
+estFinal   = ["Sapo","Sapo","Sapo","Vacio","Rana","Rana","Rana"]
 List = []
 variableparaWhile=False
 
@@ -21,47 +21,55 @@ Definimos una funcion que nos retornasra el valore de i el cual sera el lugar de
 '''
 def busquedaEspacioVacio(estado_inicial):
   for i in range(len(estado_inicial)):
-    if estado_inicial[i] == "V":
+    if estado_inicial[i] == "Vacio":
       return i
       
+'''
+Definimos la comparacion que se realizara de los elementos dentro de losa rreglos para ver si se ha llegado al estado final requerido
+agregando nuestro toque personal en cuanto a referencias otakus
+'''
 
 def OnePiece(estado_inicial,estado_final):
   for i in range(len(estado_inicial)):
     if estado_inicial[i] != estado_final[i]:
       return False
   return True
+'''
+Quitamos la recursividad y la busqueda de las condiciones y solo ponemos que agrege el estado a una lista auxiliar la cual se trabajara en la busqueda
+por anchura
+'''
 
 def reglas(estado_inicial):
   
-  i = busquedaEspacioVacio(estado_inicial)
+  vacio_actual = busquedaEspacioVacio(estado_inicial)
   listaAux = []
   
   #Movimiento Rana Marrón 1
-  if i+1 <= len(estado_inicial)-1 and estado_inicial[i+1] == "S":
-    copia_estadoActual = copy.copy(estado_inicial)
-    copia_estadoActual[i] = "S"
-    copia_estadoActual[i+1] = "V"
+  if vacio_actual+1 <= len(estado_inicial)-1 and estado_inicial[vacio_actual+1] == "Sapo":
+    copia_estadoActual = copy.copy(estado_inicial) #Una vez verificada la condicion, hacemos una copia del estado inicial y en la posicion que nos retorna el vacio verificamos
+    copia_estadoActual[vacio_actual] = "Sapo"
+    copia_estadoActual[vacio_actual+1] = "Vacio"
     listaAux.append(copia_estadoActual)
 
   #Movimiento Rana verde 2
-  if i-2 >= 0 and estado_inicial[i-2] == "R":
+  if vacio_actual-2 >= 0 and estado_inicial[vacio_actual-2] == "Rana":
     copia_estadoActual = copy.copy(estado_inicial)
-    copia_estadoActual[i] = "R"
-    copia_estadoActual[i-2] = "V"
+    copia_estadoActual[vacio_actual] = "Rana"
+    copia_estadoActual[vacio_actual-2] = "Vacio"
     listaAux.append(copia_estadoActual)  
   
   #Movimiento Rana Marrón 2
-  if i+2 <= len(estado_inicial)-1 and estado_inicial[i+2] == "S":
+  if vacio_actual+2 <= len(estado_inicial)-1 and estado_inicial[vacio_actual+2] == "Sapo":
     copia_estadoActual = copy.copy(estado_inicial)
-    copia_estadoActual[i] = "S"
-    copia_estadoActual[i+2] = "V"
+    copia_estadoActual[vacio_actual] = "Sapo"
+    copia_estadoActual[vacio_actual+2] = "Vacio"
     listaAux.append(copia_estadoActual)
   
   #Movimiento Rana verde 1
-  if i-1 >= 0 and estado_inicial[i-1] == "R":
+  if vacio_actual-1 >= 0 and estado_inicial[vacio_actual-1] == "Rana":
     copia_estadoActual = copy.copy(estado_inicial)
-    copia_estadoActual[i] = "R"
-    copia_estadoActual[i-1] = "V"
+    copia_estadoActual[vacio_actual] = "Rana"
+    copia_estadoActual[vacio_actual-1] = "Vacio"
     listaAux.append(copia_estadoActual)
   
   return listaAux  
