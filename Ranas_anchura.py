@@ -50,6 +50,7 @@ def reglas(estado_inicial):
     copia_estadoActual[vacio_actual] = "Sapo"
     copia_estadoActual[vacio_actual+1] = "Vacio"
     listaAux.append(copia_estadoActual)
+    #Aqui solo quitamos la recursividad y agregamos dentro de la lista, suena sencillo una vez que ya te partiste la coya haciendo los momientos de los mas largos
 
   if vacio_actual-2 >= 0 and estado_inicial[vacio_actual-2] == "Rana":
     copia_estadoActual = copy.copy(estado_inicial)
