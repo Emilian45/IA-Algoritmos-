@@ -23,3 +23,32 @@ def validacionExisObjeto(Orilla,Objeto):
     if i == Objeto:
       return True
   return False
+
+'''
+Tomamos la validaciones echas en profundidad que nos ayudaran a hacer la lista de movmientos para ´poder solo madnar la lista a la anchura
+'''
+
+def OpcionesVal(estado_inicial):
+
+  orilla1  = estado_inicial[0]
+  orilla2 = estado_inicial[1]
+
+  if len(orilla1) > 1 and validacionExisObjeto(orilla1,"Ladron") and not validacionExisObjeto(orilla1,"Policia"):
+     return False
+
+  if len(orilla2) > 1 and validacionExisObjeto(orilla2,"Ladron") and not validacionExisObjeto(orilla2,"Policia"):
+    return False
+
+  if validacionExisObjeto(orilla1,"Madre") and validacionExisObjeto(orilla1,"Hijo") and not validacionExisObjeto(orilla1,"Padre"):
+    return False
+  
+  if validacionExisObjeto(orilla2,"Madre") and validacionExisObjeto(orilla2,"Hijo") and not validacionExisObjeto(orilla2,"Padre"):
+    return False
+  
+  if validacionExisObjeto(orilla1,"Padre") and validacionExisObjeto(orilla1,"Hija") and not validacionExisObjeto(orilla1,"Madre"):
+    return False
+  
+  if validacionExisObjeto(orilla2,"Padre") and validacionExisObjeto(orilla2,"Hija") and not validacionExisObjeto(orilla2,"Madre"):
+    return False
+
+  return True 
