@@ -166,4 +166,24 @@ def reglas(estado_inicial,sentido):
         lista.append([copia_orilla1,copia_orilla2])
 
     return lista
+
+
+
+'''
+Iniciamos el tiempo, y despues ejecutamos elalgoritmo de busqueda en donde si sale retornara un True, imprimara el texto y 
+dara inicio al ciclo for que imprimira toda la lista donde se encuentra los pasos que siguio (todo el contenido de nuestra
+ pila  recorriendolo con un for) para llegar al estado final
+Iniciamos el segundo estado de tiempo y restamos el tiempo final menos eltiempo inicial para poder ver el tiempo final 
+'''
+profundidad_inicio = time.time()
+if busquedaAnchura(estInicio,estFinal,Ida):
+  print("Llegaste a Laugh Tale")
+  print("Nota: Obvia el estado donde regresa solo y no lo agrega a ls List de estados")
+  print("|")
+  print("v")
+  for i in List:
+    print(i)
+
+profundidad_final= time.time()
+print("\nBúsqueda finalizada en",profundidad_final - profundidad_inicio,"segundos\n")
           
