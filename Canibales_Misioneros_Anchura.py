@@ -19,8 +19,8 @@ List = []
 Si la orilla destino, el elemento 2 de nuestra lista de listas tiene los 6 objetos que diga  con un true que  se ha completado todos los
 objetivos, solo con una pequeña modificacion agregando nuestro toque personal en cuanto a referencias otakus[Nota no servira esto para anchura]
 '''
-def OnePiece(ea,ef):
-  if len(ea[1]) == len(ef):
+def OnePiece(estado_inicial,estado_final):
+  if len(estado_inicial[1]) == len(estado_final):
     return True
   else:
     return False
@@ -28,11 +28,11 @@ def OnePiece(ea,ef):
   que para verificar estemos contando el numero de misiones  y canibales en cada orilla pues sera mejor contar la cantidad de cada elemento dentro de cada orilla
   Aqui retornaremos el numero de canibales para poder hacer las comparaciones despues
 '''
-def BusquedaCanibal(arr):
+def BusquedaCanibal(Orilla):
   canibales  = 0
-  for i in arr:
+  for i in Orilla:
     if i == "Canibal":
-      canibales = canibales + 1
+      canibales += 1
   return canibales
 '''Pues como se tornaron unos problemas con el metodo que se venia manejando y ahora se esta resolviendo de manera en que
   que para verificar estemos contando el numero de misiones  y canibales en cada orilla pues sera mejor contar la cantidad de cada elemento dentro de cada orilla
@@ -40,11 +40,11 @@ def BusquedaCanibal(arr):
 '''
 
 
-def BusquedaMisionero(arr):
+def BusquedaMisionero(Orilla):
   misioneros = 0
-  for i in arr:
+  for i in Orilla:
     if i == "Misionero":
-      misioneros = misioneros + 1
+      misioneros += 1
   return misioneros  
 
 '''Que retorne  un True si en la orilla que digamos exista el objeto que igual digamos para estar viendo asi hacer las reglas
@@ -57,15 +57,12 @@ def validacionExisObjeto(Orilla,Objeto):
 #Aqui ya que tenemos los if solo seria quitar la parte de recursividad porque en si son las reglas  pero aqui si tendremos que agregar  el sentido
 #ya que al no estar de manera recursiva no sabe este punto
 Prof = 20 #La maxima cantidad de estados aceptar en nuestra cola
-def reglas(estadoA,sentido):
-
+def reglas(estado_inicial,sentido):
   ListReglas=[]
-  orilla1   = estadoA[0]
-  orilla2   = estadoA[1]
-  
-  #CRUZAR EL RIO
+  orilla1   = estado_inicial[0]
+  orilla2   = estado_inicial[1]
+
   if sentido == False:
-    #2 CANIBALES
     if BusquedaCanibal(orilla1) >= 2 and BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >= 2 or BusquedaCanibal(orilla1) >= 2 and BusquedaMisionero(orilla2) == 0:
       copia_orilla1 = copy.copy(orilla1)
       copia_orilla2 = copy.copy(orilla2)
@@ -73,8 +70,8 @@ def reglas(estadoA,sentido):
       copia_orilla1.remove("Canibal")
       copia_orilla2.append("Canibal")
       copia_orilla2.append("Canibal")
-      ListReglas.append([copia_orilla1,copia_orilla2," Atraviesa 2 caniba"])
-    #2 MISIONEROS
+      ListReglas.append([copia_orilla1,copia_orilla2])
+
     if BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >= 2 and (BusquedaMisionero(orilla2) + 2) - BusquedaCanibal(orilla2) >= 0 or BusquedaMisionero(orilla1) >= 2 and (BusquedaMisionero(orilla2) + 2) - BusquedaCanibal(orilla2) >= 0 :
       copia_orilla1 = copy.copy(orilla1)
       copia_orilla2 = copy.copy(orilla2)
@@ -82,35 +79,33 @@ def reglas(estadoA,sentido):
       copia_orilla1.remove("Misionero")
       copia_orilla2.append("Misionero")
       copia_orilla2.append("Misionero")
-      ListReglas.append([copia_orilla1,copia_orilla2," Atraviesa 2 misio"])
-    #CANIBAL Y MISIONERO
+      ListReglas.append([copia_orilla1,copia_orilla2])
+
     if BusquedaCanibal(orilla1) >= 1 and BusquedaMisionero(orilla1) >= 1 and BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >= 0 and BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >= 0:
-      #print("ENTRÓ A 1 Y 1 Nv: ", len(lista)-1)
       copia_orilla1 = copy.copy(orilla1)
       copia_orilla2 = copy.copy(orilla2)
       copia_orilla1.remove("Canibal")
       copia_orilla1.remove("Misionero")
       copia_orilla2.append("Canibal")
       copia_orilla2.append("Misionero")
-      ListReglas.append([copia_orilla1,copia_orilla2," Atraviesa 1 y 1"])      
+      ListReglas.append([copia_orilla1,copia_orilla2])      
     return ListReglas
   
   if sentido == True:
-    #CANIBAL
     if BusquedaCanibal(orilla2) >= 1 and BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1)>= 1 or BusquedaCanibal(orilla2) >= 1 and BusquedaMisionero(orilla1) == 0:
       copia_orilla1 = copy.copy(orilla1)
       copia_orilla2 = copy.copy(orilla2)
       copia_orilla2.remove("Canibal")
       copia_orilla1.append("Canibal")
-      ListReglas.append([copia_orilla1,copia_orilla2," Regreasa 1 canibal"])
-    #MISIONERO
+      ListReglas.append([copia_orilla1,copia_orilla2])
+
     if BusquedaMisionero(orilla2) >= 1 and BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2)>= 1 and BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1)>= 0:
       copia_orilla1 = copy.copy(orilla1)
       copia_orilla2 = copy.copy(orilla2)
       copia_orilla2.remove("Misionero")
       copia_orilla1.append("Misionero")
-      ListReglas.append([copia_orilla1,copia_orilla2," Regreasa 1 misio"])
-    #2 CANIBALES
+      ListReglas.append([copia_orilla1,copia_orilla2])
+
     if BusquedaCanibal(orilla2) >= 2 and BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1)>= 2 or BusquedaCanibal(orilla2) >= 2 and BusquedaMisionero(orilla1) == 0:
       copia_orilla1 = copy.copy(orilla1)
       copia_orilla2 = copy.copy(orilla2)
@@ -118,8 +113,8 @@ def reglas(estadoA,sentido):
       copia_orilla2.remove("Canibal")
       copia_orilla1.append("Canibal")
       copia_orilla1.append("Canibal")
-      ListReglas.append([copia_orilla1,copia_orilla2," Regreasa 2 caniba"])
-    #2 MISIONEROS
+      ListReglas.append([copia_orilla1,copia_orilla2])
+
     if BusquedaMisionero(orilla2) - BusquedaCanibal(orilla2) >= 2 and BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >= 0:
       copia_orilla1 = copy.copy(orilla1)
       copia_orilla2 = copy.copy(orilla2)
@@ -127,8 +122,8 @@ def reglas(estadoA,sentido):
       copia_orilla2.remove("Misionero")
       copia_orilla1.append("Misionero")
       copia_orilla1.append("Misionero")
-      ListReglas.append([copia_orilla1,copia_orilla2," Regreasa 2 misio"])
-    #MISIONERO Y CANIBAL
+      ListReglas.append([copia_orilla1,copia_orilla2])
+
     if BusquedaCanibal(orilla2) >= 1 and BusquedaMisionero(orilla2) >= 1 and BusquedaMisionero(orilla1) - BusquedaCanibal(orilla1) >= 0:
       copia_orilla1 = copy.copy(orilla1)
       copia_orilla2 = copy.copy(orilla2)
@@ -136,14 +131,26 @@ def reglas(estadoA,sentido):
       copia_orilla2.remove("Misionero")
       copia_orilla1.append("Canibal")
       copia_orilla1.append("Misionero")
-      ListReglas.append([copia_orilla1,copia_orilla2," Regreasa 1 y 1"])  
+      ListReglas.append([copia_orilla1,copia_orilla2])  
     return ListReglas
   
 def busquedaAnchura(estado_inicial,estado_final,sentido):
+  '''
+  mientras nuestro no se encuentre la solucion no se llamara al return True que viene de las reglas, el cual hara que se rompa el loop infinito
+  cipiamos el estadoinicial(actual donde nos encontremos) para poder recorrerlo con nuestro primer for y el apuntador1 ira rewcorriendo ese estadoactual
+  dentro  de el el apuntaodr sera tratado como una orilla(la que nos piden las reglas) con los posibles movmientos del estado_actual en donde nos encontremos
+   e igual se le pasa el otro parametro snetido que cambiara hasta abajo  y lo guardamos dentro de la variable opciones para poder iterarlo abajo
+  Con el apuntador dos iteramos la variable opciones que contiene una lista de lista(que manjeamos como pila)  y al tener la lista preguntamos si es el nuestro
+  estado final que buscamos en donde nos encontramos sin revisar aun los posibles movimientos, si es el caso agremaos a la lista(List) y retornamos el True que hara
+  que nuestro while salga del  ciclo, si es el caso de que no sea nuestro estado final  agregamos el estadp a la copia del apuntador para generar un estado nuevo y ese
+  estado lo agremos a la lista auxuliar 2
+  si es el caso que volvemos a entrar en el while limpiamos el estado inicial de ese momento para no guardar nada y despues  la lista auxuliar dos  la volvemos nuestro
+  estado inicial para que sin ahber guardado nada siga de ese punto  su recorrdido
+  '''
   
   while not False:
     copia_estadoinicial = copy.copy(estado_inicial) 
-    ListAux2=[]      
+    ListAux2=[]    
     for apuntador1 in copia_estadoinicial: 
       opciones = reglas(apuntador1[len(apuntador1)-1],sentido) 
       for apuntador2 in opciones:
@@ -177,4 +184,4 @@ if busquedaAnchura(estInicio,estFinal,Ida):
     print(i)
 
 profundidad_final= time.time()
-print("\nBúsqueda finalizada en",profundidad_final - profundidad_inicio,"segundos\n")
+print("\nBúsqueda finalizada en",profundidad_final - profundidad_inicio,"segundos\n") 

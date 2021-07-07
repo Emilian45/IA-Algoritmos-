@@ -167,6 +167,40 @@ def reglas(estado_inicial,sentido):
 
     return lista
 
+def busquedaAnchura(estado_inicial,estado_final,sentido):
+  '''
+  mientras nuestro no se encuentre la solucion no se llamara al return True que viene de las reglas, el cual hara que se rompa el loop infinito
+  cipiamos el estadoinicial(actual donde nos encontremos) para poder recorrerlo con nuestro primer for y el apuntador1 ira rewcorriendo ese estadoactual
+  dentro  de el el apuntaodr sera tratado como una orilla(la que nos piden las reglas) con los posibles movmientos del estado_actual en donde nos encontremos
+   e igual se le pasa el otro parametro snetido que cambiara hasta abajo  y lo guardamos dentro de la variable opciones para poder iterarlo abajo
+  Con el apuntador dos iteramos la variable opciones que contiene una lista de lista(que manjeamos como pila)  y al tener la lista preguntamos si es el nuestro
+  estado final que buscamos en donde nos encontramos sin revisar aun los posibles movimientos, si es el caso agremaos a la lista(List) y retornamos el True que hara
+  que nuestro while salga del  ciclo, si es el caso de que no sea nuestro estado final  agregamos el estadp a la copia del apuntador para generar un estado nuevo y ese
+  estado lo agremos a la lista auxuliar 2
+  si es el caso que volvemos a entrar en el while limpiamos el estado inicial de ese momento para no guardar nada y despues  la lista auxuliar dos  la volvemos nuestro
+  estado inicial para que sin ahber guardado nada siga de ese punto  su recorrdido
+  '''
+  while not False:
+    
+    copia_estadoinicial = copy.copy(estado_inicial)  
+    ListAux2=[]    
+    for apuntador1 in copia_estadoinicial: 
+     
+      opciones = reglas(apuntador1[len(apuntador1)-1],sentido) 
+      for apuntador2 in opciones:
+        #print(apuntador2)
+        copia_apuntador1 = copy.copy(apuntador1)
+        if OnePiece(apuntador2,estado_final):
+          apuntador1.append(apuntador2)
+          for apuntador3 in apuntador1:
+            #print(apuntador3)
+            List.append(apuntador3)
+          return True
+        copia_apuntador1.append(apuntador2)
+        ListAux2.append(copia_apuntador1)
+    sentido= True if sentido == False else False
+    estado_inicial.clear()   
+    estado_inicial = copy.copy(ListAux2)
 
 
 '''
