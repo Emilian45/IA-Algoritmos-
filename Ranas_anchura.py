@@ -42,31 +42,27 @@ por anchura
 
 def reglas(estado_inicial):
   
-  vacio_actual = busquedaEspacioVacio(estado_inicial)
-  listaAux = []
+  vacio_actual = busquedaEspacioVacio(estado_inicial) #Nos retorna de nuestra funcion la posicion del vacio ya que en cada estado habra una psoicion diferente asi podremos aplicar las reglas
+  listaAux = []#Nos guardara nuestros estados generados en una lista de estados para poder trabajar con ella en nuestra anchura
   
-  #Movimiento Rana Marrón 1
   if vacio_actual+1 <= len(estado_inicial)-1 and estado_inicial[vacio_actual+1] == "Sapo":
     copia_estadoActual = copy.copy(estado_inicial) #Una vez verificada la condicion, hacemos una copia del estado inicial y en la posicion que nos retorna el vacio verificamos
     copia_estadoActual[vacio_actual] = "Sapo"
     copia_estadoActual[vacio_actual+1] = "Vacio"
     listaAux.append(copia_estadoActual)
 
-  #Movimiento Rana verde 2
   if vacio_actual-2 >= 0 and estado_inicial[vacio_actual-2] == "Rana":
     copia_estadoActual = copy.copy(estado_inicial)
     copia_estadoActual[vacio_actual] = "Rana"
     copia_estadoActual[vacio_actual-2] = "Vacio"
     listaAux.append(copia_estadoActual)  
-  
-  #Movimiento Rana Marrón 2
+
   if vacio_actual+2 <= len(estado_inicial)-1 and estado_inicial[vacio_actual+2] == "Sapo":
     copia_estadoActual = copy.copy(estado_inicial)
     copia_estadoActual[vacio_actual] = "Sapo"
     copia_estadoActual[vacio_actual+2] = "Vacio"
     listaAux.append(copia_estadoActual)
-  
-  #Movimiento Rana verde 1
+
   if vacio_actual-1 >= 0 and estado_inicial[vacio_actual-1] == "Rana":
     copia_estadoActual = copy.copy(estado_inicial)
     copia_estadoActual[vacio_actual] = "Rana"
@@ -148,4 +144,5 @@ else:
 
 profundidad_final= time.time()
 print("\nBúsqueda finalizada en",profundidad_final - profundidad_inicio,"segundos\n")
+
 

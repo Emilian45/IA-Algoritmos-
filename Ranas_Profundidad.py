@@ -43,7 +43,7 @@ Prof=20#Profunidad maxima que podra alcanzar
 def busquedaProfundidad(estado_inicial,estado_final):
   if len(List)<Prof: #Vemos que nuestra lista no supere el maximo de profundidad en caso de que entre en un bucle
     List.append(estado_inicial) #Comenzamos agregando el estado inicial a la lista para tener nuestro primer nodo
-    if OnePiece(estado_inicial,estado_final):
+    if OnePiece(estado_inicial,estado_final):#Haber si esta referncia es de tu talla
         return True #Si encuentras Rie como Roger
     else:
         espacio_actual=busquedaEspacioVacio(estado_inicial) #Si no aplicaras las reglas y encuentra la isla final
