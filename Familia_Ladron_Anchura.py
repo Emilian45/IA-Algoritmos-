@@ -1,9 +1,7 @@
-#Si dios quiere acabo osi osi o no duermo pero si saleeee como que no
 import copy
-import time
 
-estInicio = [[  [["Policia","Ladron","Padre","Hijo","Hijo","Madre","Hija","Hija"],[]]   ]]
-estFinal   = ["Policia","Ladron","Padre","Hijo","Hijo","Madre","Hija","Hija"]
+estInicio = [[  [["Policia","Cholo","Papa","Hijo","Hijo","Mama","Hija","Hija"],[]]   ]]
+estFinal   = ["Policia","Cholo","Papa","Hijo","Hijo","Mama","Hija","Hija"]
 numero = 0
 Ida=False
 List = []
@@ -24,31 +22,28 @@ def validacionExisObjeto(Orilla,Objeto):
       return True
   return False
 
-'''
-Tomamos la validaciones echas en profundidad que nos ayudaran a hacer la lista de movmientos para ´poder solo madnar la lista a la anchura
-'''
 
 def OpcionesVal(estado_inicial):
 
   orilla1  = estado_inicial[0]
   orilla2 = estado_inicial[1]
 
-  if len(orilla1) > 1 and validacionExisObjeto(orilla1,"Ladron") and not validacionExisObjeto(orilla1,"Policia"):
+  if len(orilla1) > 1 and validacionExisObjeto(orilla1,"Cholo") and not validacionExisObjeto(orilla1,"Policia"):
      return False
 
-  if len(orilla2) > 1 and validacionExisObjeto(orilla2,"Ladron") and not validacionExisObjeto(orilla2,"Policia"):
+  if len(orilla2) > 1 and validacionExisObjeto(orilla2,"Cholo") and not validacionExisObjeto(orilla2,"Policia"):
     return False
 
-  if validacionExisObjeto(orilla1,"Madre") and validacionExisObjeto(orilla1,"Hijo") and not validacionExisObjeto(orilla1,"Padre"):
+  if validacionExisObjeto(orilla1,"Mama") and validacionExisObjeto(orilla1,"Hijo") and not validacionExisObjeto(orilla1,"Papa"):
     return False
   
-  if validacionExisObjeto(orilla2,"Madre") and validacionExisObjeto(orilla2,"Hijo") and not validacionExisObjeto(orilla2,"Padre"):
+  if validacionExisObjeto(orilla2,"Mama") and validacionExisObjeto(orilla2,"Hijo") and not validacionExisObjeto(orilla2,"Papa"):
     return False
   
-  if validacionExisObjeto(orilla1,"Padre") and validacionExisObjeto(orilla1,"Hija") and not validacionExisObjeto(orilla1,"Madre"):
+  if validacionExisObjeto(orilla1,"Papa") and validacionExisObjeto(orilla1,"Hija") and not validacionExisObjeto(orilla1,"Mama"):
     return False
   
-  if validacionExisObjeto(orilla2,"Padre") and validacionExisObjeto(orilla2,"Hija") and not validacionExisObjeto(orilla2,"Madre"):
+  if validacionExisObjeto(orilla2,"Papa") and validacionExisObjeto(orilla2,"Hija") and not validacionExisObjeto(orilla2,"Mama"):
     return False
 
   return True 
@@ -89,24 +84,86 @@ def reglas(estado_inicial,sentido):
         copia_orilla2.append("Hija")
         if OpcionesVal([copia_orilla1,copia_orilla2]):
           lista.append([copia_orilla1,copia_orilla2])
+
     if validacionExisObjeto(orilla1,"Papa"):
       if validacionExisObjeto(orilla1,"Hijo"):
-            copia_orilla1 = copy.copy(orilla1)
-            copia_orilla2 = copy.copy(orilla2)
-            copia_orilla1.remove("Papa")
-            copia_orilla1.remove("Hijo")
-            copia_orilla2.append("Papa")
-            copia_orilla2.append("Hijo")
-            if OpcionesVal([copia_orilla1,copia_orilla2]):
-            lista.append([copia_orilla1,copia_orilla2])
+        copia_orilla1 = copy.copy(orilla1)
+        copia_orilla2 = copy.copy(orilla2)
+        copia_orilla1.remove("Papa")
+        copia_orilla1.remove("Hijo")
+        copia_orilla2.append("Papa")
+        copia_orilla2.append("Hijo")
+        if OpcionesVal([copia_orilla1,copia_orilla2]):
+          lista.append([copia_orilla1,copia_orilla2])
 
       if validacionExisObjeto(orilla1,"Mama"):
-            copia_orilla1 = copy.copy(orilla1)
-            copia_orilla2 = copy.copy(orilla2)
-            copia_orilla1.remove("Papa")
-            copia_orilla1.remove("Mama")
-            copia_orilla2.append("Papa")
-            copia_orilla2.append("Mama")
-            if OpcionesVal([copia_orilla1,copia_orilla2]):
+        copia_orilla1 = copy.copy(orilla1)
+        copia_orilla2 = copy.copy(orilla2)
+        copia_orilla1.remove("Papa")
+        copia_orilla1.remove("Mama")
+        copia_orilla2.append("Papa")
+        copia_orilla2.append("Mama")
+        if OpcionesVal([copia_orilla1,copia_orilla2]):
+          lista.append([copia_orilla1,copia_orilla2])
+
+    if validacionExisObjeto(orilla1,"Mama"):
+      if validacionExisObjeto(orilla1,"Hija"): 
+        copia_orilla1 = copy.copy(orilla1)
+        copia_orilla2 = copy.copy(orilla2)
+        copia_orilla1.remove("Mama")
+        copia_orilla1.remove("Hija")
+        copia_orilla2.append("Mama")
+        copia_orilla2.append("Hija")
+        if OpcionesVal([copia_orilla1,copia_orilla2]):
+          lista.append([copia_orilla1,copia_orilla2])
+
+      if validacionExisObjeto(orilla1,"Papa"):
+        if validacionExisObjeto(orilla1,"Mama"):
+          copia_orilla1 = copy.copy(orilla1)
+          copia_orilla2 = copy.copy(orilla2)
+          copia_orilla1.remove("Mama")
+          copia_orilla1.remove("Papa")
+          copia_orilla2.append("Mama")
+          copia_orilla2.append("Papa")
+          if OpcionesVal([copia_orilla1,copia_orilla2]):
             lista.append([copia_orilla1,copia_orilla2])
+    return lista
+
+  if sentido == True:  
+    if validacionExisObjeto(orilla2,"Policia"):
+      copia_orilla1 = copy.copy(orilla1)
+      copia_orilla2 = copy.copy(orilla2)
+      copia_orilla2.remove("Policia")
+      copia_orilla1.append("Policia")
+      if OpcionesVal([copia_orilla1,copia_orilla2]):
+        lista.append([copia_orilla1,copia_orilla2])
+
+    if validacionExisObjeto(orilla2,"Policia"):
+      if validacionExisObjeto(orilla2,"Cholo"):
+        copia_orilla1 = copy.copy(orilla1)
+        copia_orilla2 = copy.copy(orilla2)
+        copia_orilla2.remove("Policia")
+        copia_orilla2.remove("Cholo")
+        copia_orilla1.append("Policia")
+        copia_orilla1.append("Cholo")
+        if OpcionesVal([copia_orilla1,copia_orilla2]):
+          lista.append([copia_orilla1,copia_orilla2])
+
+    if validacionExisObjeto(orilla2,"Papa"):
+      copia_orilla1 = copy.copy(orilla1)
+      copia_orilla2 = copy.copy(orilla2)
+      copia_orilla2.remove("Papa")
+      copia_orilla1.append("Papa")
+      if OpcionesVal([copia_orilla1,copia_orilla2]):
+        lista.append([copia_orilla1,copia_orilla2])
+
+    if validacionExisObjeto(orilla2,"Mama"):
+      copia_orilla1 = copy.copy(orilla1)
+      copia_orilla2 = copy.copy(orilla2)
+      copia_orilla2.remove("Mama")
+      copia_orilla1.append("Mama")
+      if OpcionesVal([copia_orilla1,copia_orilla2]):
+        lista.append([copia_orilla1,copia_orilla2])
+
+    return lista
           
