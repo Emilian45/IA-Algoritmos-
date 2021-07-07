@@ -1,4 +1,5 @@
 import copy
+import time
 
 estInicio = [[  [["Policia","Cholo","Papa","Hijo","Hijo","Mama","Hija","Hija"],[]]   ]]
 estFinal   = ["Policia","Cholo","Papa","Hijo","Hijo","Mama","Hija","Hija"]
@@ -21,7 +22,12 @@ def validacionExisObjeto(Orilla,Objeto):
     if i == Objeto:
       return True
   return False
+'''
+Como tenemos que validar los estados que pueden ser validas estbaleceremos dos opciones que seran dar una validacion de  lo que podemos tener de opciones validas y estas
+nos ayudaran a que mientras estblezcamos las reglas y posiblesmovmientos validen mientras se hacen, es acortar yn poco lo que teniamos en profundidad en las opciones 
+y expandir las reglas de movmientos para que se pueda mover nuestro algortimo, aunque no es como que se mueva sino haga una validacion simultaea en cada estado mientras se hacen los movmientos
 
+'''
 
 def OpcionesVal(estado_inicial):
 
@@ -48,12 +54,14 @@ def OpcionesVal(estado_inicial):
 
   return True 
 
-
+'''
+hacemos lo mismo que los otros algoritmos  estblecemos las dos orillas con nuestro estado inicial en sus dos listas de listas y comenzamos con lo demas
+'''
 def reglas(estado_inicial,sentido):
   orilla1  = estado_inicial[0]
   orilla2 = estado_inicial[1]
   lista = []
-  if sentido == False:      
+  if sentido == False:  #Nos     damos orientacion para ver si venimos o vamos de las orillas y facilita la busqueda, intente sin esto en anchura y las validaciones se hacen muy grandes 
     if validacionExisObjeto(orilla1,"Policia"):
       if validacionExisObjeto(orilla1,"Cholo"):
         copia_orilla1 = copy.copy(orilla1)
@@ -179,6 +187,7 @@ def busquedaAnchura(estado_inicial,estado_final,sentido):
   estado lo agremos a la lista auxuliar 2
   si es el caso que volvemos a entrar en el while limpiamos el estado inicial de ese momento para no guardar nada y despues  la lista auxuliar dos  la volvemos nuestro
   estado inicial para que sin ahber guardado nada siga de ese punto  su recorrdido
+  es genial que el algoritmo jale para todos, primero dios que este bien formulado 
   '''
   while not False:
     
@@ -202,7 +211,6 @@ def busquedaAnchura(estado_inicial,estado_final,sentido):
     estado_inicial.clear()   
     estado_inicial = copy.copy(ListAux2)
 
-
 '''
 Iniciamos el tiempo, y despues ejecutamos elalgoritmo de busqueda en donde si sale retornara un True, imprimara el texto y 
 dara inicio al ciclo for que imprimira toda la lista donde se encuentra los pasos que siguio (todo el contenido de nuestra
@@ -220,4 +228,3 @@ if busquedaAnchura(estInicio,estFinal,Ida):
 
 profundidad_final= time.time()
 print("\nBúsqueda finalizada en",profundidad_final - profundidad_inicio,"segundos\n")
-          
