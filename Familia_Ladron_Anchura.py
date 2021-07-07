@@ -52,3 +52,40 @@ def OpcionesVal(estado_inicial):
     return False
 
   return True 
+
+
+def reglas(estado_inicial,sentido):
+  orilla1  = estado_inicial[0]
+  orilla2 = estado_inicial[1]
+  lista = []
+  if sentido == False:      
+    if validacionExisObjeto(orilla1,"Policia"):
+      if validacionExisObjeto(orilla1,"Cholo"):
+        copia_orilla1 = copy.copy(orilla1)
+        copia_orilla2 = copy.copy(orilla2)
+        copia_orilla1.remove("Policia")
+        copia_orilla1.remove("Cholo")
+        copia_orilla2.append("Policia")
+        copia_orilla2.append("Cholo")
+        if OpcionesVal([copia_orilla1,copia_orilla2]):
+          lista.append([copia_orilla1,copia_orilla2])
+            
+      if validacionExisObjeto(orilla1,"Hijo"):
+        copia_orilla1 = copy.copy(orilla1)
+        copia_orilla2 = copy.copy(orilla2)
+        copia_orilla1.remove("Policia")
+        copia_orilla1.remove("Hijo")
+        copia_orilla2.append("Policia")
+        copia_orilla2.append("Hijo")
+        if OpcionesVal([copia_orilla1,copia_orilla2]):
+          lista.append([copia_orilla1,copia_orilla2])
+
+      if validacionExisObjeto(orilla1,"Hija"):  
+        copia_orilla1 = copy.copy(orilla1)
+        copia_orilla2 = copy.copy(orilla2)
+        copia_orilla1.remove("Policia")
+        copia_orilla1.remove("Hija")
+        copia_orilla2.append("Policia")
+        copia_orilla2.append("Hija")
+        if OpcionesVal([copia_orilla1,copia_orilla2]):
+          lista.append([copia_orilla1,copia_orilla2])
