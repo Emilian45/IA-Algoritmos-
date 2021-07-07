@@ -89,3 +89,24 @@ def reglas(estado_inicial,sentido):
         copia_orilla2.append("Hija")
         if OpcionesVal([copia_orilla1,copia_orilla2]):
           lista.append([copia_orilla1,copia_orilla2])
+    if validacionExisObjeto(orilla1,"Papa"):
+      if validacionExisObjeto(orilla1,"Hijo"):
+            copia_orilla1 = copy.copy(orilla1)
+            copia_orilla2 = copy.copy(orilla2)
+            copia_orilla1.remove("Papa")
+            copia_orilla1.remove("Hijo")
+            copia_orilla2.append("Papa")
+            copia_orilla2.append("Hijo")
+            if OpcionesVal([copia_orilla1,copia_orilla2]):
+            lista.append([copia_orilla1,copia_orilla2])
+
+      if validacionExisObjeto(orilla1,"Mama"):
+            copia_orilla1 = copy.copy(orilla1)
+            copia_orilla2 = copy.copy(orilla2)
+            copia_orilla1.remove("Papa")
+            copia_orilla1.remove("Mama")
+            copia_orilla2.append("Papa")
+            copia_orilla2.append("Mama")
+            if OpcionesVal([copia_orilla1,copia_orilla2]):
+            lista.append([copia_orilla1,copia_orilla2])
+          
