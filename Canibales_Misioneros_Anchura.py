@@ -10,7 +10,7 @@ dir= Al tener problemas con la priorizcion  de la direccion en que se tienen que
 cada que se mueve de una orilla asi alternando las condicionales if y que tenga un libre funcionamiento dentro de la recursividad
 
 '''
-estInicio = [[  [[ "Canibal","Canibal","Canibal","Misionero","Misionero","Misionero" ],[]]   ]]
+estInicio = [[  [[ "Canibal","Canibal","Canibal","Misionero","Misionero","Misionero" ],[]] ]]
 estFinal   = [ "Canibal","Canibal","Canibal","Misionero","Misionero","Misionero" ]
 Ida = False
 
